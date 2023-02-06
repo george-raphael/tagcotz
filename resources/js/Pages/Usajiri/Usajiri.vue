@@ -32,10 +32,9 @@ const getDistricts = () => {
         });
 };
 
-const storeUsajiri = ()=>{
-    usajiriForm.post(route('store.usajiri'))
-}
-
+const storeUsajiri = () => {
+    usajiriForm.post(route("store.usajiri"));
+};
 </script>
 
 <template>
@@ -103,12 +102,15 @@ const storeUsajiri = ()=>{
                     px-3
                 "
             >
-                <p class="text-center text-xl">Jaza taarifa zako ili ujisajiri</p>
-                <hr>
+                <p class="text-center text-xl">
+                    Jaza taarifa zako ili ujisajiri
+                </p>
+                <hr />
 
                 <div class="mt-3">
                     <label for="first_name">First Name</label>
                     <input
+                        id="first_name"
                         v-model="usajiriForm.first_name"
                         type="text"
                         class="w-full"
@@ -116,18 +118,20 @@ const storeUsajiri = ()=>{
                     />
                 </div>
                 <div class="mt-3">
-                    <label for="first_name">Last Name</label>
+                    <label for="last_name">Last Name</label>
                     <input
+                        id="last_name"
                         v-model="usajiriForm.last_name"
                         type="text"
                         class="w-full"
-                        placeholder="First name"
+                        placeholder="Last name"
                     />
                 </div>
 
                 <div class="mt-3">
                     <label for="phone_number">Phone Number</label>
                     <input
+                    id="phone_number"
                         v-model="usajiriForm.phone_number"
                         type="text"
                         class="w-full"
@@ -139,8 +143,9 @@ const storeUsajiri = ()=>{
                 </div>
 
                 <div class="mt-3">
-                    <label for="first_name">Region</label>
+                    <label for="region_id">Region</label>
                     <select
+                    id="region_id"
                         @change="getDistricts"
                         v-model="usajiriForm.region_id"
                         class="w-full"
@@ -157,12 +162,14 @@ const storeUsajiri = ()=>{
                 </div>
 
                 <div class="mt-3">
-                    <label for="first_name">
-                        District <span>{{ isLoading?'Loading...':'' }}</span></label>
+                    <label for="district_id">
+                        District
+                        <span>{{ isLoading ? "Loading..." : "" }}</span></label
+                    >
                     <select
+                    id="district_id"
                         v-model="usajiriForm.district_id"
                         class="w-full"
-                        placeholder="First name"
                     >
                         <option
                             v-for="district in districts"
@@ -174,7 +181,10 @@ const storeUsajiri = ()=>{
                     </select>
                 </div>
 
-                <PrimaryButton @click="storeUsajiri" class="mt-3 flex items-center justify-center">
+                <PrimaryButton
+                    @click="storeUsajiri"
+                    class="mt-3 flex items-center justify-center"
+                >
                     <span>Hifazi</span>
                 </PrimaryButton>
             </div>
