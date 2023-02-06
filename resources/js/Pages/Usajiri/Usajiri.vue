@@ -2,6 +2,7 @@
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
+import GuestLayout from "../../Layouts/GuestLayout.vue";
 
 defineProps({
     canLogin: Boolean,
@@ -38,6 +39,8 @@ const storeUsajiri = () => {
 </script>
 
 <template>
+    <GuestLayout>
+
     <Head title="Welcome" />
 
     <div
@@ -54,7 +57,7 @@ const storeUsajiri = () => {
     >
         <div
             v-if="canLogin"
-            class="hidden fixed top-0 right-0 px-6 py-4 sm:block"
+            class="fixed top-0 right-0 px-6 py-4 sm:block"
         >
             <Link
                 v-if="$page.props.user"
@@ -85,14 +88,13 @@ const storeUsajiri = () => {
         </div>
 
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div class="">
+            <div class="my-4">
                 <img class="w-24 h-24 mx-auto" src="/img/logo.png" alt="" />
             </div>
 
             <div
                 class="
                     flex flex-col
-                    mt-8
                     bg-white
                     dark:bg-gray-800
                     overflow-hidden
@@ -188,34 +190,8 @@ const storeUsajiri = () => {
                     <span>Hifazi</span>
                 </PrimaryButton>
             </div>
-
-            <div
-                class="
-                    flex
-                    justify-center
-                    mt-4
-                    sm:items-center sm:justify-between
-                "
-            >
-                <div class="text-center text-sm text-gray-500 sm:text-left">
-                    <div class="flex items-center">
-                        Copyright &copy;
-                        <a href="https://tagcotz.com" class="ml-1 underline">
-                            TAGCO
-                        </a>
-                    </div>
-                </div>
-
-                <div
-                    class="
-                        ml-4
-                        text-center text-sm text-gray-500
-                        sm:text-right sm:ml-0
-                    "
-                >
-                    &nbsp;Online Registration System
-                </div>
-            </div>
         </div>
     </div>
+    </GuestLayout>
+
 </template>
