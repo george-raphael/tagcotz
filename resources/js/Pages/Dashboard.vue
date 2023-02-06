@@ -7,9 +7,13 @@ const { attendees } = defineProps(["attendees"]);
 const attendeesData = ref({ ...attendees });
 const searchQuery = ref("");
 const searchAttendees = _.debounce(() => {
-    axios.get(route("search.attendees", { searchQuery:searchQuery.value??'' })).then(({data})=>{
-        attendeesData.value = data;
-    });
+    axios
+        .get(
+            route("search.attendees", { searchQuery: searchQuery.value ?? "" })
+        )
+        .then(({ data }) => {
+            attendeesData.value = data;
+        });
 }, 1000);
 </script>
 
@@ -86,7 +90,7 @@ const searchAttendees = _.debounce(() => {
                                                 border border-slate-300
                                             "
                                         >
-                                            Region
+                                            Email
                                         </th>
                                         <th
                                             class="
@@ -95,7 +99,25 @@ const searchAttendees = _.debounce(() => {
                                                 border border-slate-300
                                             "
                                         >
-                                            District
+                                            Location
+                                        </th>
+                                        <th
+                                            class="
+                                                text-left
+                                                bg-slate-300
+                                                border border-slate-300
+                                            "
+                                        >
+                                            Institution
+                                        </th>
+                                        <th
+                                            class="
+                                                text-left
+                                                bg-slate-300
+                                                border border-slate-300
+                                            "
+                                        >
+                                            Cheque Number
                                         </th>
                                     </tr>
                                 </thead>
@@ -123,10 +145,17 @@ const searchAttendees = _.debounce(() => {
                                             >
                                         </td>
                                         <td class="border border-slate-300">
+                                            {{ attendee.email }}
+                                        </td>
+                                        <td class="border border-slate-300">
+                                            {{ attendee.district.name }},
                                             {{ attendee.region.name }}
                                         </td>
                                         <td class="border border-slate-300">
-                                            {{ attendee.district.name }}
+                                            {{ attendee.institution }}
+                                        </td>
+                                        <td class="border border-slate-300">
+                                            {{ attendee.cheque_number }}
                                         </td>
                                     </tr>
                                 </tbody>

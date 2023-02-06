@@ -31,6 +31,9 @@ class PagesController extends Controller
             'phone_number' => 'required|unique:attendances',
             'region_id' => 'required',
             'district_id' => 'required',
+            'email' => 'required|unique:attendances',
+            'institution' => 'required',
+            'cheque_number' => 'required'
         ]);
 
         Attendance::create($data);
