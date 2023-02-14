@@ -15,7 +15,7 @@ defineProps({
 const districts = ref(null);
 const isLoading = ref(null);
 
-const usajiriForm = useForm({
+const usajiliForm = useForm({
     first_name: "",
     last_name: "",
     phone_number: "",
@@ -29,15 +29,15 @@ const usajiriForm = useForm({
 const getDistricts = () => {
     isLoading.value = true;
     axios
-        .get(route("region.districts", { region: usajiriForm.region_id }))
+        .get(route("region.districts", { region: usajiliForm.region_id }))
         .then(({ data }) => {
             districts.value = data;
             isLoading.value = false;
         });
 };
 
-const storeUsajiri = () => {
-    usajiriForm.post(route("store.usajiri"));
+const storeUsajili = () => {
+    usajiliForm.post(route("store.usajili"));
 };
 </script>
 
@@ -107,14 +107,14 @@ const storeUsajiri = () => {
                     "
                 >
                     <p class="text-center text-xl">
-                        Jaza taarifa zako ili ujisajiri
+                        Jaza taarifa zako ili ujisajili
                     </p>
                     <hr />
                      <div class="mt-3">
                         <label for="title">Title</label>
                         <select
                             id="title"
-                            v-model="usajiriForm.title"
+                            v-model="usajiliForm.title"
                             class="w-full"
                             placeholder="1112267"
                         >
@@ -126,33 +126,33 @@ const storeUsajiri = () => {
                         <option value="Prof.">Prof.</option>
                     </select>
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.title }}
+                            {{ usajiliForm.errors.title }}
                         </div>
                     </div>
                     <div class="mt-3">
                         <label for="first_name">First Name</label>
                         <input
                             id="first_name"
-                            v-model="usajiriForm.first_name"
+                            v-model="usajiliForm.first_name"
                             type="text"
                             class="w-full"
                             placeholder="First name"
                         />
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.first_name }}
+                            {{ usajiliForm.errors.first_name }}
                         </div>
                     </div>
                     <div class="mt-3">
                         <label for="last_name">Last Name</label>
                         <input
                             id="last_name"
-                            v-model="usajiriForm.last_name"
+                            v-model="usajiliForm.last_name"
                             type="text"
                             class="w-full"
                             placeholder="Last name"
                         />
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.last_name }}
+                            {{ usajiliForm.errors.last_name }}
                         </div>
                     </div>
 
@@ -160,26 +160,26 @@ const storeUsajiri = () => {
                         <label for="phone_number">Phone Number</label>
                         <input
                             id="phone_number"
-                            v-model="usajiriForm.phone_number"
+                            v-model="usajiliForm.phone_number"
                             type="text"
                             class="w-full"
                             placeholder="+255759123123"
                         />
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.phone_number }}
+                            {{ usajiliForm.errors.phone_number }}
                         </div>
                     </div>
                     <div class="mt-3">
                         <label for="email">Email</label>
                         <input
                             id="email"
-                            v-model="usajiriForm.email"
+                            v-model="usajiliForm.email"
                             type="text"
                             class="w-full"
                             placeholder="user@gmail.com"
                         />
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.phone_number }}
+                            {{ usajiliForm.errors.phone_number }}
                         </div>
                     </div>
 
@@ -187,13 +187,13 @@ const storeUsajiri = () => {
                         <label for="institution">Institution Name</label>
                         <input
                             id="institution"
-                            v-model="usajiriForm.institution"
+                            v-model="usajiliForm.institution"
                             type="text"
                             class="w-full"
                             placeholder="Mbeya University"
                         />
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.institution }}
+                            {{ usajiliForm.errors.institution }}
                         </div>
                     </div>
 
@@ -202,7 +202,7 @@ const storeUsajiri = () => {
                         <select
                             id="region_id"
                             @change="getDistricts"
-                            v-model="usajiriForm.region_id"
+                            v-model="usajiliForm.region_id"
                             class="w-full"
                             placeholder="First name"
                         >
@@ -215,7 +215,7 @@ const storeUsajiri = () => {
                             </option>
                         </select>
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.region_id }}
+                            {{ usajiliForm.errors.region_id }}
                         </div>
                     </div>
 
@@ -228,7 +228,7 @@ const storeUsajiri = () => {
                         >
                         <select
                             id="district_id"
-                            v-model="usajiriForm.district_id"
+                            v-model="usajiliForm.district_id"
                             class="w-full"
                         >
                             <option
@@ -240,15 +240,15 @@ const storeUsajiri = () => {
                             </option>
                         </select>
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.district_id }}
+                            {{ usajiliForm.errors.district_id }}
                         </div>
                     </div>
 
                     <PrimaryButton
-                        @click="storeUsajiri"
+                        @click="storeUsajili"
                         class="mt-3 flex items-center justify-center"
                     >
-                        <span>Sajiri</span>
+                        <span>Sajili</span>
                     </PrimaryButton>
                 </div>
             </div>

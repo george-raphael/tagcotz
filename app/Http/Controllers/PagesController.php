@@ -23,7 +23,7 @@ class PagesController extends Controller
             ->paginate(20);
         return $data;
     }
-    public function storeUsajiri()
+    public function storeUsajili()
     {
         $data = request()->validate([
             'first_name' => 'required',
@@ -44,18 +44,18 @@ class PagesController extends Controller
     {
         return District::where('region_id', $region)->orderBy('name')->get();
     }
-    public function usajiri()
+    public function usajili()
     {
         $data['regions'] = Region::orderBy('name')->get();
         $data['canLogin'] = Route::has('login');
         $data['canRegister'] = Route::has('register');
         $data['laravelVersion'] = Application::VERSION;
         $data['phpVersion'] = PHP_VERSION;
-        return Inertia::render('Usajiri/Usajiri', $data);
+        return Inertia::render('Usajili/Usajili', $data);
     }
 
     public function successful()
     {
-        return Inertia::render('Usajiri/Successful');
+        return Inertia::render('Usajili/Successful');
     }
 }

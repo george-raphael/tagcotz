@@ -34,7 +34,7 @@ const searchAttendees = _.debounce(() => {
                         <div class="px-6 sm:px-20 bg-white">
                             <div class="flex justify-between">
                                 <div class="text-2xl">
-                                    Walio jisajiri ({{ attendeesData.total }})
+                                    Walio jisajili ({{ attendeesData.total }})
                                 </div>
                                 <div>
                                     <input

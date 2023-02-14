@@ -26,8 +26,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get( '/usajiri', [PagesController::class, 'usajiri'])->name('usajiri');
-Route::post('/usajiri', [PagesController::class,'storeUsajiri'])->name('store.usajiri');
+Route::get( '/usajili', [PagesController::class, 'usajili'])->name('usajili');
+Route::post('/usajili', [PagesController::class,'storeUsajili'])->name('store.usajili');
 Route::get('/successful', [PagesController::class, 'successful'])->name('successful');
 
 

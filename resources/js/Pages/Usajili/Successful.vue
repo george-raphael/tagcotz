@@ -75,7 +75,7 @@ defineProps({
                     py-6
                 "
             >
-                <p>Usajiri umekamilika</p>
+                <p>Usajili umekamilika</p>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
