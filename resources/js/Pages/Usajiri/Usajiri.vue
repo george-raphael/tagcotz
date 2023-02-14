@@ -122,6 +122,8 @@ const storeUsajiri = () => {
                         <option value="Mrs.">Mrs.</option>
                         <option value="Miss.">Miss.</option>
                         <option value="Rev.">Rev.</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Prof.">Prof.</option>
                     </select>
                         <div class="mt-3 text-red-500">
                             {{ usajiriForm.errors.title }}
