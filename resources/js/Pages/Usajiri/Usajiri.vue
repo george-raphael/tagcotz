@@ -110,7 +110,23 @@ const storeUsajiri = () => {
                         Jaza taarifa zako ili ujisajiri
                     </p>
                     <hr />
-
+                     <div class="mt-3">
+                        <label for="title">Title</label>
+                        <select
+                            id="title"
+                            v-model="usajiriForm.title"
+                            class="w-full"
+                            placeholder="1112267"
+                        >
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Miss.">Miss.</option>
+                        <option value="Rev.">Rev.</option>
+                    </select>
+                        <div class="mt-3 text-red-500">
+                            {{ usajiriForm.errors.title }}
+                        </div>
+                    </div>
                     <div class="mt-3">
                         <label for="first_name">First Name</label>
                         <input
@@ -164,23 +180,7 @@ const storeUsajiri = () => {
                             {{ usajiriForm.errors.phone_number }}
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <label for="title">Title</label>
-                        <select
-                            id="title"
-                            v-model="usajiriForm.title"
-                            class="w-full"
-                            placeholder="1112267"
-                        >
-                        <option value="Mr.">Mr.</option>
-                        <option value="Mrs.">Mrs.</option>
-                        <option value="Miss.">Miss.</option>
-                        <option value="Rev.">Rev.</option>
-                    </select>
-                        <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.title }}
-                        </div>
-                    </div>
+
                     <div class="mt-3">
                         <label for="institution">Institution Name</label>
                         <input
