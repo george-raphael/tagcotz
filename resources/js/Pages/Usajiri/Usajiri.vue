@@ -21,7 +21,7 @@ const usajiriForm = useForm({
     phone_number: "",
     region_id: "",
     district_id: "",
-    cheque_number:"",
+    title:"",
     email:"",
     institution:""
 });
@@ -165,16 +165,20 @@ const storeUsajiri = () => {
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="cheque_number">Cheque Number</label>
-                        <input
-                            id="cheque_number"
-                            v-model="usajiriForm.cheque_number"
-                            type="text"
+                        <label for="title">Title</label>
+                        <select
+                            id="title"
+                            v-model="usajiriForm.title"
                             class="w-full"
                             placeholder="1112267"
-                        />
+                        >
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Miss.">Miss.</option>
+                        <option value="Rev.">Rev.</option>
+                    </select>
                         <div class="mt-3 text-red-500">
-                            {{ usajiriForm.errors.cheque_number }}
+                            {{ usajiriForm.errors.title }}
                         </div>
                     </div>
                     <div class="mt-3">
@@ -242,7 +246,7 @@ const storeUsajiri = () => {
                         @click="storeUsajiri"
                         class="mt-3 flex items-center justify-center"
                     >
-                        <span>Hifazi</span>
+                        <span>Sajiri</span>
                     </PrimaryButton>
                 </div>
             </div>

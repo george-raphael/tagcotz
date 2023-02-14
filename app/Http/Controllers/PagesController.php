@@ -33,7 +33,7 @@ class PagesController extends Controller
             'district_id' => 'required',
             'email' => 'required|unique:attendances',
             'institution' => 'required',
-            'cheque_number' => 'required'
+            'title' => 'required'
         ]);
 
         Attendance::create($data);

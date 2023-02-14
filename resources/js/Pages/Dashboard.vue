@@ -110,15 +110,6 @@ const searchAttendees = _.debounce(() => {
                                         >
                                             Institution
                                         </th>
-                                        <th
-                                            class="
-                                                text-left
-                                                bg-slate-300
-                                                border border-slate-300
-                                            "
-                                        >
-                                            Cheque Number
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -153,9 +144,6 @@ const searchAttendees = _.debounce(() => {
                                         </td>
                                         <td class="border border-slate-300">
                                             {{ attendee.institution }}
-                                        </td>
-                                        <td class="border border-slate-300">
-                                            {{ attendee.cheque_number }}
                                         </td>
                                     </tr>
                                 </tbody>
