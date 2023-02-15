@@ -179,7 +179,7 @@ const storeUsajili = () => {
                             placeholder="user@gmail.com"
                         />
                         <div class="mt-3 text-red-500">
-                            {{ usajiliForm.errors.phone_number }}
+                            {{ usajiliForm.errors.email }}
                         </div>
                     </div>
 
