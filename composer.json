@@ -12,6 +12,11 @@
         "laravel/jetstream": "^2.16",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.12",
+        "niklasravnsborg/laravel-pdf": "4.0.0",
+        "psr/log": "^2.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "spatie/laravel-medialibrary": "^10.0.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {

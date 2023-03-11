@@ -9,10 +9,16 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-
-
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 class PagesController extends Controller
 {
+    public function dashboard()
+    {
+        $data['attendees'] = Attendance::with(['region', 'district'])->latest()
+            ->paginate(20);
+        return inertia('Dashboard', $data);
+    }
+
     public function searchAttendees()
     {
         $searchQuery = request('searchQuery');
@@ -33,13 +39,27 @@ class PagesController extends Controller
             'district_id' => 'required',
             'email' => 'required|unique:attendances',
             'institution' => 'required',
-            'title' => 'required'
+            'title' => 'required',
+            'receipt_file' => 'required|mimes:jpeg,jpg,png'
         ]);
 
-        Attendance::create($data);
 
+        $attendance = Attendance::create($data);
+        if (request()->hasFile('receipt_file')) {
+            $attendance->clearMediaCollection('receipts');
+            $attendance->addMediaFromRequest('receipt_file')->toMediaCollection('receipts');
+        }
         return redirect()->route('successful');
     }
+    public function updateUsajili(Attendance $attendance)
+    {
+        $data = request()->validate([
+            'status' => 'required|string',
+        ]);
+        $attendance->update($data);
+        return redirect()->route('dashboard');
+    }
+
     public function getDistrictsByRegionId($region)
     {
         return District::where('region_id', $region)->orderBy('name')->get();
@@ -57,5 +77,14 @@ class PagesController extends Controller
     public function successful()
     {
         return Inertia::render('Usajili/Successful');
+    }
+
+    //IDS
+    public function printIds()
+    {
+        $data['attendees'] = Attendance::query()->where('status','verified')->orderBy('id','asc')->get()->chunk(2);
+        $pdf = PDF::loadView('pdf.pdf-ids', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('TAGCOTZ-ids.pdf');
     }
 }

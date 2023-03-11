@@ -27,18 +27,15 @@ Route::get('/', function () {
 });
 
 Route::get( '/usajili', [PagesController::class, 'usajili'])->name('usajili');
-Route::post('/usajili', [PagesController::class,'storeUsajili'])->name('store.usajili');
 Route::get('/successful', [PagesController::class, 'successful'])->name('successful');
+Route::post('/usajili', [PagesController::class,'storeUsajili'])->name('store.usajili');
 
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        $data['attendees'] = Attendance::with(['region','district'])->latest()
-        ->paginate(20);
-        return Inertia::render('Dashboard',$data);
-    })->name('dashboard');
+    ])->group(function () {
+        Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
+        Route::post('/{attendance}/update-usajili', [PagesController::class,'updateUsajili'])->name('update.usajili');
 });

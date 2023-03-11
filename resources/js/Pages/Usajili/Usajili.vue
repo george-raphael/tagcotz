@@ -23,7 +23,8 @@ const usajiliForm = useForm({
     district_id: "",
     title:"",
     email:"",
-    institution:""
+    institution:"",
+    receipt_file: null
 });
 
 const getDistricts = () => {
@@ -243,7 +244,20 @@ const storeUsajili = () => {
                             {{ usajiliForm.errors.district_id }}
                         </div>
                     </div>
-
+                    <div class="mt-3">
+                        <label for="receipt_file">Payment Receipt</label>
+                        <input
+                            id="receipt_file"
+                            name="receipt_file"
+                            accept="image/png, image/jpeg image/jpg"
+                            @change="usajiliForm.receipt_file = $event.target.files[0]"
+                            type="file"
+                            class="w-full border p-1 border-gray-500"
+                        />
+                        <div class="mt-3 text-red-500">
+                            {{ usajiliForm.errors.receipt_file }}
+                        </div>
+                    </div>
                     <PrimaryButton
                         @click="storeUsajili"
                         class="mt-3 flex items-center justify-center"
