@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
+
 class PagesController extends Controller
 {
     public function dashboard()
@@ -79,10 +80,21 @@ class PagesController extends Controller
         return Inertia::render('Usajili/Successful');
     }
 
+    public function getVerifiedIdAPI()
+    {
+        $attendance = array_map(function ($value) {
+            return "TAGCOTZ-" . $value;
+        }, [...Attendance::where('status', 'verified')->pluck('id')]);
+        return response()->json([
+            'success' => true,
+            'data' =>$attendance,
+            'count'=>count($attendance)
+        ]);
+    }
     //IDS
     public function printIds()
     {
-        $data['attendees'] = Attendance::query()->where('status','verified')->orderBy('id','asc')->get()->chunk(2);
+        $data['attendees'] = Attendance::query()->where('status', 'verified')->orderBy('id', 'asc')->get()->chunk(2);
         $pdf = PDF::loadView('pdf.pdf-ids', $data);
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('TAGCOTZ-ids.pdf');

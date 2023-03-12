@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    <table style="width: 100%; border: 1px dotted black; border-collapse: collapse;">
+    <table style="width: 100%; ">
         @foreach ($attendees as $key => $attendee)
             <tr>
                 @foreach ($attendee as $singleCard)
-                    <td style="min-width: 85.6mm;min-height: 53.98mm; border: 2px dotted black;padding: 6px;">
+                    <td style="min-width: 85.6mm;min-height: 53.98mm; border: 2px dotted black;padding: 6px;margin: 6px">
                         <table style="width: 100%;">
                             <tr>
                                 <td>
