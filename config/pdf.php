@@ -8,7 +8,7 @@ return [
 	'keywords'              => '',
 	'creator'               => 'TAGCOTZ Pdf',
 	'display_mode'          => 'fullpage',
-	'tempDir'               => base_path('../temp/'),
+	'tempDir'               => storage_path('mpdf/temp/'),
 	'pdf_a'                 => false,
 	'pdf_a_auto'            => false,
 	'icc_profile_path'      => ''
