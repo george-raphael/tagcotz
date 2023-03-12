@@ -82,6 +82,7 @@ class PagesController extends Controller
 
     public function getVerifiedIdAPI()
     {
+
         $attendance = array_map(function ($value) {
             return "TAGCOTZ-" . $value;
         }, [...Attendance::where('status', 'verified')->pluck('id')]);
