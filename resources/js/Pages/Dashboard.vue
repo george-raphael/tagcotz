@@ -90,7 +90,11 @@ function imageLoading() {
                                 >
                                     <b>Paid By</b>: {{ activeAttendee.name }}
                                 </DialogTitle>
-                                <div class="mt-2 h-[40rem] min-w-xl relative">
+                                <a
+                                    class="mt-2 min-h-[45rem] min-w-xl relative block"
+                                    target="_blank"
+                                    :href="activeAttendee.receipt"
+                                >
                                     <img
                                         :onload="imageLoading"
                                         :src="
@@ -99,9 +103,9 @@ function imageLoading() {
                                                 : activeAttendee.receipt
                                         "
                                         alt="Receipt image"
-                                        class="h-full w-full absolute inset-0 object-center object-contain"
+                                        class="h-full w-full absolute inset-0 object-contain object-center"
                                     />
-                                </div>
+                                </a>
 
                                 <div
                                     class="mt-4 flex items-center justify-end space-x-2"
@@ -137,12 +141,12 @@ function imageLoading() {
             </Dialog>
         </TransitionRoot>
         <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-2 lg:px-4">
                 <div
                     class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-6"
                 >
                     <div>
-                        <div class="px-6 sm:px-20 bg-white">
+                        <div class="px-4 sm:px-12 bg-white">
                             <div class="flex justify-between">
                                 <div class="text-2xl">
                                     Walio jisajili ({{ attendeesData.total }})
@@ -150,7 +154,6 @@ function imageLoading() {
                                 <div
                                     class="flex flex-row space-x-2 items-center"
                                 >
-
                                     <div>
                                         <input
                                             v-model="searchQuery"
@@ -162,7 +165,7 @@ function imageLoading() {
                                     <a
                                         :href="route('dashboard.print.ids')"
                                         target="_blank"
-                                        class=" px-4 py-2 bg-blue-800 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition flex items-center justify-center rounded-none"
+                                        class="px-4 py-2 bg-blue-800 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition flex items-center justify-center rounded-none"
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -178,12 +181,14 @@ function imageLoading() {
                                             />
                                         </svg>
 
-                                        <span class="ml-2 text-lg">Print IDS</span>
+                                        <span class="ml-2 text-lg"
+                                            >Print IDS</span
+                                        >
                                     </a>
                                 </div>
                             </div>
                             <table
-                                class="border border-collapse mt-6 text-gray-500 w-full"
+                                class="border border-collapse mt-6 text-gray-500 min-w-full"
                             >
                                 <thead>
                                     <tr>
@@ -244,19 +249,23 @@ function imageLoading() {
                                         <td
                                             class="border px-2 border-slate-300"
                                         >
-                                            {{ attendee.name }}
+                                            <p>{{ attendee.name }}</p>
                                         </td>
                                         <td
                                             class="border px-2 border-slate-300"
                                         >
-                                            <a
-                                                class="text-blue-500"
-                                                :href="
-                                                    'tel: ' +
-                                                    attendee.phone_number
-                                                "
-                                                >{{ attendee.phone_number }}</a
-                                            >
+                                            <p>
+                                                <a
+                                                    class="text-blue-500 block"
+                                                    :href="
+                                                        'tel: ' +
+                                                        attendee.phone_number
+                                                    "
+                                                    >{{
+                                                        attendee.phone_number
+                                                    }}
+                                                    </a>
+                                            </p>
                                         </td>
                                         <td
                                             class="border px-2 border-slate-300"

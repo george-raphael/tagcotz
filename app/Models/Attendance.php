@@ -28,4 +28,8 @@ class Attendance extends Model implements HasMedia
     {
         return $this->belongsTo(District::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
