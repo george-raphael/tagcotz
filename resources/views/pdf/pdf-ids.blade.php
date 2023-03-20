@@ -26,7 +26,7 @@
                                 <td style="text-align: center; font-size: 14px">
                                     {{--  <b>{{ $singleCard->name }}</b>  --}}
                                 </td>
-                                <td rowspan="5" style="width: 70px;">
+                                <td rowspan="6" style="width: 70px;">
                                     {!! str_replace(
                                         '<?xml version="1.0" encoding="UTF-8"?>',
                                         '',
@@ -54,6 +54,11 @@
                             <tr>
                                 <td>
                                     District: {{ $singleCard->district->name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                        Verified By: {{ $singleCard->user?->name }}
                                 </td>
                             </tr>
                             <tr>

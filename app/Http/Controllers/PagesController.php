@@ -6,16 +6,17 @@ use App\Models\Attendance;
 use App\Models\District;
 use Inertia\Inertia;
 use App\Models\Region;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\File;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
+use Image;
 
 class PagesController extends Controller
 {
     public function dashboard()
     {
-        $data['attendees'] = Attendance::with(['region', 'district'])->latest()
+        $data['attendees'] = Attendance::with(['region', 'district', 'user:id,name'])->latest()
             ->paginate(20);
         return inertia('Dashboard', $data);
     }
@@ -32,6 +33,7 @@ class PagesController extends Controller
     }
     public function storeUsajili()
     {
+
         $data = request()->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -44,11 +46,19 @@ class PagesController extends Controller
             'receipt_file' => 'required|mimes:jpeg,jpg,png'
         ]);
 
-
         $attendance = Attendance::create($data);
         if (request()->hasFile('receipt_file')) {
+            $img = request()->file('receipt_file');
+            $image = Image::make($img->getRealPath());
+            $imageName = time() . '-' . $img->getClientOriginalName();
+            $destinationPath = public_path('images/');
+            $image->resize(720, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save($destinationPath . $imageName);
             $attendance->clearMediaCollection('receipts');
-            $attendance->addMediaFromRequest('receipt_file')->toMediaCollection('receipts');
+            $attendance->addMedia($destinationPath . $imageName)->toMediaCollection('receipts');
+            File::delete($destinationPath . $imageName);
         }
         return redirect()->route('successful');
     }
@@ -57,7 +67,7 @@ class PagesController extends Controller
         $data = request()->validate([
             'status' => 'required|string',
         ]);
-        $attendance->update($data);
+        $attendance->update($data + ['user_id' => auth()->id()]);
         return redirect()->route('dashboard');
     }
 
@@ -88,8 +98,8 @@ class PagesController extends Controller
         }, [...Attendance::where('status', 'verified')->pluck('id')]);
         return response()->json([
             'success' => true,
-            'data' =>$attendance,
-            'count'=>count($attendance)
+            'data' => $attendance,
+            'count' => count($attendance)
         ]);
     }
     //IDS
