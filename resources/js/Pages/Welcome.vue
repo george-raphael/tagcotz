@@ -77,13 +77,13 @@ defineProps({
                         px-6
                     "
                 >
-                    <p>Mfumo wa kujisajili</p>
+                    <p class="dark:text-white">Mfumo wa kujisajili</p>
                     <PrimaryButton class="mt-3">
                         <Link
                             :href="route('usajili')"
                             class="flex items-center justify-center"
                         >
-                            <span>Jisajili</span>
+                            <span >Jisajili</span>
                             &nbsp;
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

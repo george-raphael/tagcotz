@@ -57,38 +57,7 @@ const storeUsajili = () => {
                 sm:items-center sm:pt-0
             "
         >
-            <div v-if="canLogin" class="fixed top-0 right-0 px-6 py-4 sm:block">
-                <Link
-                    v-if="$page.props.user"
-                    :href="route('dashboard')"
-                    class="text-sm text-gray-700 dark:text-gray-500 underline"
-                    >Dashboard</Link
-                >
 
-                <template v-else>
-                    <Link
-                        :href="route('login')"
-                        class="
-                            text-sm text-gray-700
-                            dark:text-gray-500
-                            underline
-                        "
-                        >Log in</Link
-                    >
-
-                    <Link
-                        v-if="canRegister"
-                        :href="route('register')"
-                        class="
-                            ml-4
-                            text-sm text-gray-700
-                            dark:text-gray-500
-                            underline
-                        "
-                        >Register</Link
-                    >
-                </template>
-            </div>
 
             <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                 <div class="my-4">
@@ -107,12 +76,12 @@ const storeUsajili = () => {
                         px-3
                     "
                 >
-                    <p class="text-center text-xl">
+                    <p class="text-center text-xl dark:text-white">
                         Jaza taarifa zako ili ujisajili
                     </p>
                     <hr />
                      <div class="mt-3">
-                        <label for="title">Title</label>
+                        <label for="title" class="dark:text-white">Title</label>
                         <select
                             id="title"
                             v-model="usajiliForm.title"
@@ -131,7 +100,7 @@ const storeUsajili = () => {
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="first_name">First Name</label>
+                        <label for="first_name" class="dark:text-white">First Name</label>
                         <input
                             id="first_name"
                             v-model="usajiliForm.first_name"
@@ -144,7 +113,7 @@ const storeUsajili = () => {
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="last_name">Last Name</label>
+                        <label for="last_name" class="dark:text-white">Last Name</label>
                         <input
                             id="last_name"
                             v-model="usajiliForm.last_name"
@@ -158,7 +127,7 @@ const storeUsajili = () => {
                     </div>
 
                     <div class="mt-3">
-                        <label for="phone_number">Phone Number</label>
+                        <label for="phone_number" class="dark:text-white">Phone Number</label>
                         <input
                             id="phone_number"
                             v-model="usajiliForm.phone_number"
@@ -171,7 +140,7 @@ const storeUsajili = () => {
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="email">Email</label>
+                        <label for="email" class="dark:text-white">Email</label>
                         <input
                             id="email"
                             v-model="usajiliForm.email"
@@ -185,7 +154,7 @@ const storeUsajili = () => {
                     </div>
 
                     <div class="mt-3">
-                        <label for="institution">Institution Name</label>
+                        <label for="institution" class="dark:text-white">Institution Name</label>
                         <input
                             id="institution"
                             v-model="usajiliForm.institution"
@@ -199,7 +168,7 @@ const storeUsajili = () => {
                     </div>
 
                     <div class="mt-3">
-                        <label for="region_id">Region</label>
+                        <label for="region_id" class="dark:text-white">Region</label>
                         <select
                             id="region_id"
                             @change="getDistricts"
@@ -221,7 +190,7 @@ const storeUsajili = () => {
                     </div>
 
                     <div class="mt-3">
-                        <label for="district_id">
+                        <label for="district_id" class="dark:text-white">
                             District
                             <span>{{
                                 isLoading ? "Loading..." : ""
@@ -245,14 +214,14 @@ const storeUsajili = () => {
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="receipt_file">Payment Receipt</label>
+                        <label for="receipt_file" class="dark:text-white">Payment Receipt</label>
                         <input
                             id="receipt_file"
                             name="receipt_file"
                             accept="image/png, image/jpeg image/jpg"
                             @change="usajiliForm.receipt_file = $event.target.files[0]"
                             type="file"
-                            class="w-full border p-1 border-gray-500"
+                            class="w-full border p-1 border-gray-500 dark:text-white"
                         />
                         <div class="mt-3 text-red-500">
                             {{ usajiliForm.errors.receipt_file }}
