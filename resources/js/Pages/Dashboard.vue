@@ -91,25 +91,18 @@ function imageLoading() {
                                 >
                                     <b>Paid By</b>: {{ activeAttendee.name }}
                                 </DialogTitle>
-                                <a
-                                    class="mt-2 min-h-[45rem] min-w-xl relative block"
-                                    target="_blank"
-                                    :href="activeAttendee.receipt"
+                                <div
+                                    class="my-12 flex items-center justify-center text-2xl underline"
                                 >
-                                    <img
-                                        :onload="imageLoading"
-                                        :src="
-                                            isLoading
-                                                ? '/img/tagcotz.gif'
-                                                : activeAttendee.receipt
-                                        "
+                                    <a
+                                        target="_blank"
+                                        :href="activeAttendee.receipt"
                                         alt="Receipt image"
-                                        class="h-full w-full absolute inset-0 object-contain object-center"
-                                    />
-                                </a>
+                                    >Click to Preview</a>
+                                </div>
 
                                 <div
-                                    class="mt-4 flex items-center justify-end space-x-2"
+                                    class="mt-4 flex items-center justify-center space-x-2"
                                 >
                                     <button
                                         type="button"
@@ -262,10 +255,8 @@ function imageLoading() {
                                                         'tel: ' +
                                                         attendee.phone_number
                                                     "
-                                                    >{{
-                                                        attendee.phone_number
-                                                    }}
-                                                    </a>
+                                                    >{{ attendee.phone_number }}
+                                                </a>
                                             </p>
                                         </td>
                                         <td
@@ -334,7 +325,6 @@ function imageLoading() {
                             <div class="mt-3">
                                 <Pagination :items="attendeesData" />
                             </div>
-
                         </div>
                     </div>
                 </div>

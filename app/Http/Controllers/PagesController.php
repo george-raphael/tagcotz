@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UsajiriRequest;
-use App\Models\Attendance;
-use App\Models\District;
+use Image;
 use Inertia\Inertia;
 use App\Models\Region;
+use App\Models\District;
+use App\Models\Attendance;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\UsajiriRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\File;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
-use Image;
 
 class PagesController extends Controller
 {
@@ -34,8 +35,10 @@ class PagesController extends Controller
     }
     public function storeUsajili(UsajiriRequest $request)
     {
-        $attendance = Attendance::create($request->validated());
-        $attendance->addMediaFromRequest('receipt_file')->toMediaCollection('receipts');
+        DB::transaction(function () use ($request) {
+            $attendance = Attendance::create($request->validated());
+            $attendance->addMediaFromRequest('receipt_file')->toMediaCollection('receipts');
+        });
         return redirect()->route('successful');
     }
     public function updateUsajili(Attendance $attendance)
