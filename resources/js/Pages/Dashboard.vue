@@ -15,14 +15,16 @@ import { router } from "@inertiajs/vue3";
 const { attendees } = defineProps(["attendees"]);
 const attendeesData = ref({ ...attendees });
 const activeAttendee = ref(null);
+const activeIndex = ref(null);
 const isOpen = ref(false);
 const isLoading = ref(true);
 function closeModal() {
     isOpen.value = false;
 }
 const searchQuery = ref("");
-function openModalForAttendee(params) {
+function openModalForAttendee(params, index) {
     activeAttendee.value = params;
+    activeIndex.value = index;
     isOpen.value = true;
 }
 function updateAttendeeStatus(status) {
@@ -37,6 +39,15 @@ function updateAttendeeStatus(status) {
             preserveScroll: true,
         }
     );
+}
+
+function deleteAttendance(){
+    isOpen.value = false;
+     axios.post(route('delete.usajili',{attendance:activeAttendee.value.id}))
+     .then(()=>{
+        attendeesData.value.data?.splice(activeIndex.value,1)
+        attendeesData.value.total = attendeesData.value.total-1;
+     })
 }
 const searchAttendees = _.debounce(() => {
     axios
@@ -98,15 +109,22 @@ function imageLoading() {
                                         target="_blank"
                                         :href="activeAttendee.receipt"
                                         alt="Receipt image"
-                                    >Click to Preview</a>
+                                        >Click to Preview</a
+                                    >
                                 </div>
 
                                 <div
                                     class="mt-4 flex items-center justify-center space-x-2"
                                 >
                                     <button
-                                        type="button"
+                                       @click="deleteAttendance"
                                         class="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-6 py-2 text-lg font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-6 py-2 text-lg font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
                                         @click="closeModal"
                                     >
                                         Cancel
@@ -311,7 +329,8 @@ function imageLoading() {
                                             <button
                                                 @click.prevent="
                                                     openModalForAttendee(
-                                                        attendee
+                                                        attendee,
+                                                        index
                                                     )
                                                 "
                                                 class="underline text-blue-700 mx-2"

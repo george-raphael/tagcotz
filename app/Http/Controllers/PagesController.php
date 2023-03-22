@@ -49,6 +49,11 @@ class PagesController extends Controller
         $attendance->update($data + ['user_id' => auth()->id()]);
         return redirect()->route('dashboard');
     }
+    public function deleteUsajili(Attendance $attendance)
+    {
+        $attendance->delete();
+        return back();
+    }
 
     public function getDistrictsByRegionId($region)
     {

@@ -26,16 +26,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get( '/usajili', [PagesController::class, 'usajili'])->name('usajili');
+Route::get('/usajili', [PagesController::class, 'usajili'])->name('usajili');
 Route::get('/successful', [PagesController::class, 'successful'])->name('successful');
-Route::post('/usajili', [PagesController::class,'storeUsajili'])->name('store.usajili');
+Route::post('/usajili', [PagesController::class, 'storeUsajili'])->name('store.usajili');
 
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    ])->group(function () {
-        Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
-        Route::post('/{attendance}/update-usajili', [PagesController::class,'updateUsajili'])->name('update.usajili');
+])->group(function () {
+    Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
+    Route::post(
+        '/{attendance}/update-usajili',
+        [PagesController::class, 'updateUsajili']
+    )->name('update.usajili');
+    Route::post('/{attendance}/delete-usajili', [PagesController::class, 'deleteUsajili'])->name('delete.usajili');
 });
