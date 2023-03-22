@@ -1,0 +1,80 @@
+<template>
+    <div v-if="items.links.length > 3">
+        <div class="hidden sm:flex flex-wrap -mb-1">
+            <template v-for="(link, key) in items.links">
+                <div
+                    v-if="link.url === null"
+                    :key="key"
+                    class="btn-pagination-null"
+                    v-html="link.label"
+                />
+                <Link
+                    v-else
+                    :key="`link-${key}`"
+                    class="btn-pagination"
+                    :class="{
+                        'bg-primary-1000 text-inetfontprimary font-bold':
+                            link.active,
+                    }"
+                    :href="link.url"
+                    v-html="link.label"
+                />
+            </template>
+        </div>
+        <div class="flex sm:hidden space-x-9 -mb-1">
+            <!-- Previous -->
+            <div
+                v-if="items.links[1].url === null"
+                class="btn-pagination-null"
+                v-html="items.links[1].label"
+            ></div>
+            <Link
+                v-else
+                key="link-prev"
+                class="btn-pagination"
+                :href="items.links[1].url"
+                v-html="'&laquo; Previous'"
+            />
+            <!-- End previous -->
+
+            <!-- <Link
+                v-if="items.current_page - 2 > 1"
+                key="link-prev"
+                class="btn-pagination"
+                :href="items.links[items.current_page - 2].url"
+                v-html="items.links[items.current_page - 2].label"
+            />
+            <Link
+                key="link-prev"
+                class="btn-pagination bg-primary-1000 text-inetfontprimary font-bold"
+                href="#"
+                v-html="items.links[items.current_page - 1].label"
+            />
+            <Link
+                v-if="items.current_page <= items.last_page"
+                key="link-prev"
+                class="btn-pagination"
+                :href="items.links[items.current_page].url"
+                v-html="items.links[items.current_page].label"
+            /> -->
+            <!-- Next -->
+            <div
+                v-if="items.links[items.links.length - 2].url === null"
+                key="prev"
+                class="btn-pagination-null"
+                v-html="items.links[items.links.length - 2].label"
+            ></div>
+            <Link
+                v-else
+                key="link-prev"
+                class="btn-pagination"
+                :href="items.links[items.links.length - 2].url"
+                v-html="'&raquo; Next'"
+            />
+        </div>
+    </div>
+</template>
+
+<script setup>
+const { items } = defineProps(["items"]);
+</script>

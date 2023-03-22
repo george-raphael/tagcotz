@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsajiriRequest;
 use App\Models\Attendance;
 use App\Models\District;
 use Inertia\Inertia;
@@ -31,35 +32,10 @@ class PagesController extends Controller
             ->paginate(20);
         return $data;
     }
-    public function storeUsajili()
+    public function storeUsajili(UsajiriRequest $request)
     {
-
-        $data = request()->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|unique:attendances',
-            'region_id' => 'required',
-            'district_id' => 'required',
-            'email' => 'required|unique:attendances',
-            'institution' => 'required',
-            'title' => 'required',
-            'receipt_file' => 'required|mimes:jpeg,jpg,png'
-        ]);
-
-        $attendance = Attendance::create($data);
-        if (request()->hasFile('receipt_file')) {
-            $img = request()->file('receipt_file');
-            $image = Image::make($img->getRealPath());
-            $imageName = time() . '-' . $img->getClientOriginalName();
-            $destinationPath = public_path('images/');
-            $image->resize(720, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save($destinationPath . $imageName);
-            $attendance->clearMediaCollection('receipts');
-            $attendance->addMedia($destinationPath . $imageName)->toMediaCollection('receipts');
-            File::delete($destinationPath . $imageName);
-        }
+        $attendance = Attendance::create($request->validated());
+        $attendance->addMediaFromRequest('receipt_file')->toMediaCollection('receipts');
         return redirect()->route('successful');
     }
     public function updateUsajili(Attendance $attendance)

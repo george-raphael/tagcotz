@@ -218,7 +218,6 @@ const storeUsajili = () => {
                         <input
                             id="receipt_file"
                             name="receipt_file"
-                            accept="image/png, image/jpeg image/jpg"
                             @change="usajiliForm.receipt_file = $event.target.files[0]"
                             type="file"
                             class="w-full border p-1 border-gray-500 dark:text-white"

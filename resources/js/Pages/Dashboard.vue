@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 import {
     TransitionRoot,
@@ -330,6 +331,10 @@ function imageLoading() {
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="mt-3">
+                                <Pagination :items="attendeesData" />
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -60,7 +60,7 @@ return [
             'secret' => env('DO_SECRET_ACCESS_KEY'),
             'region' => env('DO_DEFAULT_REGION'),
             'bucket' => env('DO_BUCKET'),
-            'root' => 'tagcotz',
+            'root' => 'tagcotzdev',
             'endpoint' => env('DO_ENDPOINT'),
         ],
         'domedia' => [

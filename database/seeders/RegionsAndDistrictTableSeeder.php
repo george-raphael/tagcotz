@@ -298,10 +298,10 @@ class RegionsAndDistrictTableSeeder extends Seeder
                         "name" => "Bunda"
                     ],
                     [
-                        "name" => "Musoma Mjini"
+                        "name" => "Musoma"
                     ],
                     [
-                        "name" => "Musoma Vijijini"
+                        "name" => "Butiama"
                     ],
                     [
                         "name" => "Rorya"
@@ -410,9 +410,6 @@ class RegionsAndDistrictTableSeeder extends Seeder
             [
                 "name" => "Mwanza",
                 "districts" => [
-                    [
-                        "name" => "Geita"
-                    ],
                     [
                         "name" => "Ilemela"
                     ],
