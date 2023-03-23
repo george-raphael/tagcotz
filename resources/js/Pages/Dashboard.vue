@@ -256,7 +256,7 @@ function imageLoading() {
                                         <td
                                             class="border px-2 border-slate-300"
                                         >
-                                            {{ index + 1 }}
+                                            {{ attendeesData.from+index }}
                                         </td>
                                         <td
                                             class="border px-2 border-slate-300"
