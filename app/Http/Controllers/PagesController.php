@@ -19,7 +19,7 @@ class PagesController extends Controller
     public function dashboard()
     {
         $data['attendees'] = Attendance::with(['region', 'district', 'user:id,name'])->latest()
-            ->paginate(2);
+            ->paginate(20);
         return inertia('Dashboard', $data);
     }
 
