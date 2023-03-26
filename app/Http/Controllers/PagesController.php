@@ -7,8 +7,10 @@ use Inertia\Inertia;
 use App\Models\Region;
 use App\Models\District;
 use App\Models\Attendance;
+use App\Exports\AttendanceExport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\UsajiriRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -18,20 +20,67 @@ class PagesController extends Controller
 {
     public function dashboard()
     {
-        $data['attendees'] = Attendance::with(['region', 'district', 'user:id,name'])->latest()
-            ->paginate(20);
+        $data['verified'] = Attendance::where('status', 'verified')
+            ->count();
+        $data['unverified'] = Attendance::where('status', 'unverified')
+            ->count();
+        $data['invalid'] = Attendance::where('status', 'invalid')
+            ->count();
+        $data['all'] = Attendance::count();
+
         return inertia('Dashboard', $data);
+    }
+
+    public function export()
+    {
+        $status = request('status');
+        $searchQuery = request('searchQuery');
+
+        return Excel::download(new AttendanceExport($searchQuery, $status),ucfirst($status).' '.now()->format('Y-m-d'). '.xlsx');
+    }
+
+    public function attendances()
+    {
+        $status = request('status');
+
+        $data['attendees'] = Attendance::when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
+            $query->where('status', $status);
+        })
+            ->with(['region', 'district', 'user:id,name'])
+            ->latest()
+            ->paginate(20);
+        $data['status'] = $status;
+
+        return inertia('Attendance', $data);
     }
 
     public function searchAttendees()
     {
+        $status = request('status');
         $searchQuery = request('searchQuery');
-        $data = Attendance::with(['region', 'district'])
-            ->where('first_name', 'like', '%' . $searchQuery . '%')
-            ->orWhere('last_name', 'like', '%' . $searchQuery . '%')
+
+        $data = $this->filterAttendances($searchQuery, $status);
+        return $data;
+    }
+    public function filterAttendances($searchQuery, $status)
+    {
+        return Attendance::when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
+            $query->where('status', $status);
+        })
+            ->where(function ($query) use ($searchQuery) {
+                $query->orWhere('first_name', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('last_name', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('institution', 'like', '%' . $searchQuery . '%')
+                    ->orWhereHas('region', function ($query) use ($searchQuery) {
+                        $query->where('name', 'like', '%' . $searchQuery . '%');
+                    })
+                    ->orWhereHas('district', function ($query) use ($searchQuery) {
+                        $query->where('name', 'like', '%' . $searchQuery . '%');
+                    });
+            })
+            ->with(['region', 'district'])
             ->latest()
             ->paginate(20);
-        return $data;
     }
     public function storeUsajili(UsajiriRequest $request)
     {

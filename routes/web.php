@@ -37,6 +37,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
+    Route::get('/attendances', [PagesController::class, 'attendances'])->name('attendances');
     Route::post(
         '/{attendance}/update-usajili',
         [PagesController::class, 'updateUsajili']

@@ -14,3 +14,6 @@
 .btn-pagination-null {
     @apply mb-1 mr-1 px-4 py-3 text-gray-500 text-sm leading-4 border rounded bg-gray-200 hover:cursor-not-allowed
 }
+.text-link{
+    @apply text-blue-500 hover:underline cursor-pointer
+}
