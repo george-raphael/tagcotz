@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 .btn-pagination {
-
     @apply bg-blue-500 mb-1 mr-1 px-4 py-3 text-sm
     hover:cursor-pointer
            hover:bg-blue-500 hover:text-white border

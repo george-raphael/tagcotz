@@ -48,7 +48,8 @@ class PagesController extends Controller
         })
             ->with(['region', 'district', 'user:id,name'])
             ->latest()
-            ->paginate(20);
+            ->paginate(20)
+            ->withQueryString();
         $data['status'] = $status;
 
         return inertia('Attendance', $data);

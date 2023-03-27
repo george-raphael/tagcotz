@@ -172,58 +172,61 @@ function capitalize(string) {
                 >
                     <div>
                         <div class="px-4 sm:px-12 bg-white">
-                            <div class="flex justify-between">
+                            <div class="flex sm:flex-row flex-col justify-between">
                                 <div class="text-2xl">
                                     {{ capitalize(status) }} ({{
                                         attendeesData.total
                                     }})
                                 </div>
                                 <div
-                                    class="flex flex-row space-x-2 items-center"
+                                    class="flex sm:flex-row flex-col-reverse space-x-2 items-center"
                                 >
                                     <div>
                                         <input
+                                        class="mt-2"
                                             v-model="searchQuery"
                                             @keyup="searchAttendees"
                                             type="text"
                                             placeholder="Search..."
                                         />
                                     </div>
-                                    <a
-                                        :href="route('dashboard.print.ids')"
-                                        target="_blank"
-                                        class="px-4 py-2 bg-blue-800 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition flex items-center justify-center rounded-none"
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="w-6 h-6"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"
-                                            />
-                                        </svg>
+                                    <div class="flex flex-row space-x-2 mt-2 items-center">
+                                        <a
+                                            :href="route('dashboard.print.ids')"
+                                            target="_blank"
+                                            class="px-4 py-2 bg-blue-800 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition flex items-center justify-center rounded-none"
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"
+                                                />
+                                            </svg>
 
-                                        <span class="ml-2 text-lg"
-                                            >Print IDS</span
+                                            <span class="ml-2 text-lg"
+                                                >Print IDS</span
+                                            >
+                                        </a>
+                                        <a
+                                            :href="route('dashboard.export',{searchQuery:searchQuery,status:status})"
+                                            target="_blank"
+                                            class="px-4 py-2 bg-blue-800 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition flex items-center justify-center rounded-none"
                                         >
-                                    </a>
-                                    <a
-                                        :href="route('dashboard.export',{searchQuery:searchQuery,status:status})"
-                                        target="_blank"
-                                        class="px-4 py-2 bg-blue-800 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition flex items-center justify-center rounded-none"
-                                    >
-                                    <svg class="w-5 h-5 text-gray-100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M48 448V64c0-8.8 7.2-16 16-16H224v80c0 17.7 14.3 32 32 32h80V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16zM64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V154.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0H64zm90.9 233.3c-8.1-10.5-23.2-12.3-33.7-4.2s-12.3 23.2-4.2 33.7L161.6 320l-44.5 57.3c-8.1 10.5-6.3 25.5 4.2 33.7s25.5 6.3 33.7-4.2L192 359.1l37.1 47.6c8.1 10.5 23.2 12.3 33.7 4.2s12.3-23.2 4.2-33.7L222.4 320l44.5-57.3c8.1-10.5 6.3-25.5-4.2-33.7s-25.5-6.3-33.7 4.2L192 280.9l-37.1-47.6z"/></svg>
+                                        <svg class="w-5 h-5 text-gray-100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M48 448V64c0-8.8 7.2-16 16-16H224v80c0 17.7 14.3 32 32 32h80V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16zM64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V154.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0H64zm90.9 233.3c-8.1-10.5-23.2-12.3-33.7-4.2s-12.3 23.2-4.2 33.7L161.6 320l-44.5 57.3c-8.1 10.5-6.3 25.5 4.2 33.7s25.5 6.3 33.7-4.2L192 359.1l37.1 47.6c8.1 10.5 23.2 12.3 33.7 4.2s12.3-23.2 4.2-33.7L222.4 320l44.5-57.3c8.1-10.5 6.3-25.5-4.2-33.7s-25.5-6.3-33.7 4.2L192 280.9l-37.1-47.6z"/></svg>
 
-                                        <span class="ml-2 text-lg">Excel</span>
-                                    </a>
+                                            <span class="ml-2 text-lg">Excel</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div v-if="!isLoading">
+                            <div v-if="!isLoading" class="overscroll-x-scroll">
                                 <table
                                     class="border border-collapse mt-6 text-gray-500 min-w-full"
                                 >
@@ -369,7 +372,7 @@ function capitalize(string) {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="mt-3">
+                                <div class="mt-3 min-w-full">
                                     <Pagination :items="attendeesData" />
                                 </div>
                             </div>
