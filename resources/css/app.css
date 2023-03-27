@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn-pagination {
-    @apply bg-blue-500 mb-1 mr-1 px-4 py-3 text-sm
-    hover:cursor-pointer
-           hover:bg-blue-500 hover:text-white border
-           focus:border-indigo-500 rounded
-           active:bg-blue-500 text-white
-}
 
 .btn-pagination-null {
     @apply mb-1 mr-1 px-4 py-3 text-gray-500 text-sm leading-4 border rounded bg-gray-200 hover:cursor-not-allowed

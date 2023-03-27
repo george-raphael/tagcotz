@@ -11,9 +11,13 @@
                 <Link
                     v-else
                     :key="`link-${key}`"
-                    class="btn-pagination"
+                    class="bg-blue-800 mb-1 mr-1 px-4 py-3 text-sm
+                        hover:cursor-pointer
+                        hover:bg-blue-800 hover:text-white border
+                        focus:border-blue-800 rounded
+                        active:bg-blue-500 text-white"
                     :class="{
-                        'bg-primary-1000 text-inetfontprimary font-bold':
+                        'bg-blue-400 text-white font-bold':
                             link.active,
                     }"
                     :href="link.url"
