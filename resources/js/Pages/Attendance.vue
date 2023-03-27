@@ -66,7 +66,7 @@ const searchAttendees = _.debounce(() => {
 }, 1000);
 
 function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string?.charAt(0)?.toUpperCase() + string?.slice(1);
 }
 </script>
 
