@@ -226,7 +226,7 @@ function capitalize(string) {
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="!isLoading" class="overscroll-x-scroll">
+                            <div v-if="!isLoading">
                                 <table
                                     class="border border-collapse mt-6 text-gray-500 min-w-full"
                                 >
