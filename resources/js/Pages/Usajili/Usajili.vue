@@ -80,6 +80,7 @@ const storeUsajili = () => {
                             class="w-full"
                             placeholder="1112267"
                         >
+                            <option value="Ms.">Ms.</option>
                             <option value="Mr.">Mr.</option>
                             <option value="Mrs.">Mrs.</option>
                             <option value="Miss.">Miss.</option>
@@ -227,6 +228,7 @@ const storeUsajili = () => {
                                     $event.target.files[0]
                             "
                             type="file"
+                             accept="image/png, image/jpeg,image/jpg, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                             class="w-full border p-1 border-gray-500 dark:text-white"
                         />
                         <div class="mt-3 text-red-500">
