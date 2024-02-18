@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/regions', [PagesController::class, 'getRegions'])->name('regions');
 Route::get('/region/{region}/districts', [PagesController::class, 'getDistrictsByRegionId'])->name('region.districts');
 Route::get('/attendees/search',[PagesController::class,'searchAttendees'])->name('search.attendees');
 Route::get('/get-verified-ID',[PagesController::class, 'getVerifiedIdAPI']);

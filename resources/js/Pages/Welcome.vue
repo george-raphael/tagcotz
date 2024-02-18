@@ -80,7 +80,7 @@ defineProps({
                     <p class="dark:text-white">Mfumo wa kujisajili</p>
                     <PrimaryButton class="mt-3">
                         <Link
-                            :href="route('usajili')"
+                            :href="route('register')"
                             class="flex items-center justify-center"
                         >
                             <span >Jisajili</span>

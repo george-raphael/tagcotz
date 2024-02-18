@@ -216,25 +216,7 @@ const storeUsajili = () => {
                             {{ usajiliForm.errors.district_id }}
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <label for="receipt_file" class="dark:text-white"
-                            >Payment Receipt</label
-                        >
-                        <input
-                            id="receipt_file"
-                            name="receipt_file"
-                            @change="
-                                usajiliForm.receipt_file =
-                                    $event.target.files[0]
-                            "
-                            type="file"
-                             accept="image/png, image/jpeg,image/jpg, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                            class="w-full border p-1 border-gray-500 dark:text-white"
-                        />
-                        <div class="mt-3 text-red-500">
-                            {{ usajiliForm.errors.receipt_file }}
-                        </div>
-                    </div>
+                  
                     <PrimaryButton
                      :disabled = "isLoading"
                         @click="storeUsajili"

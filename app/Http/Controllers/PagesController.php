@@ -36,7 +36,7 @@ class PagesController extends Controller
         $status = request('status');
         $searchQuery = request('searchQuery');
 
-        return Excel::download(new AttendanceExport($searchQuery, $status),ucfirst($status).' '.now()->format('Y-m-d'). '.xlsx');
+        return Excel::download(new AttendanceExport($searchQuery, $status), ucfirst($status) . ' ' . now()->format('Y-m-d') . '.xlsx');
     }
 
     public function attendances()
@@ -46,7 +46,7 @@ class PagesController extends Controller
         $data['attendees'] = Attendance::when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
             $query->where('status', $status);
         })
-            ->with(['region', 'district', 'user:id,name'])
+            ->with(['region', 'district', 'user:id,first_name,last_name,title'])
             ->latest()
             ->paginate(20)
             ->withQueryString();
@@ -109,6 +109,11 @@ class PagesController extends Controller
     {
         return District::where('region_id', $region)->orderBy('name')->get();
     }
+    public function getRegions()
+    {
+        return Region::orderBy('name')->get();
+    }
+
     public function usajili()
     {
         $data['regions'] = Region::orderBy('name')->get();
