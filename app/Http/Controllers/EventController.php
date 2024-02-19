@@ -109,7 +109,7 @@ class EventController extends Controller
             'metadata' => [],
         ]);
 
-        return $formattedNumber;
+        return back()->with('success','Ombi la malipo limetumwa tafadhali kamilisha muamala kwenye simu yako.');
     }
 
     public function successfulPayment(Request $request)
