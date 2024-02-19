@@ -33,6 +33,7 @@ class User extends Authenticatable
         'institution',
         'email',
         'password',
+        'type'
     ];
 
     /**
@@ -63,9 +64,25 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'name'
     ];
 
-    function getNameAttribute() : string {
-        return $this->title.' '.$this->first_name.' '.$this->last_name;
+    function getNameAttribute(): string
+    {
+        return str($this->title . ' ' . $this->first_name . ' ' . $this->last_name)->lower()->headline();
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function attendence()
+    {
+        return $this->hasOne(Attendance::class)->where(['event_id'=>Event::where('status', 1)->first()?->id, 'user_id' => auth()->id()]);
     }
 }

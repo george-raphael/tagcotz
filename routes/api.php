@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,7 @@ Route::get('/regions', [PagesController::class, 'getRegions'])->name('regions');
 Route::get('/region/{region}/districts', [PagesController::class, 'getDistrictsByRegionId'])->name('region.districts');
 Route::get('/attendees/search',[PagesController::class,'searchAttendees'])->name('search.attendees');
 Route::get('/get-verified-ID',[PagesController::class, 'getVerifiedIdAPI']);
+
+Route::post('/success', [EventController::class, 'successfulPayment'])->name('successful.payment');
+Route::post('/cancel', [EventController::class, 'cancelPayment'])->name('cancel.payment');
+

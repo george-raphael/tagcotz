@@ -16,17 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        // $this->call(RegionsAndDistrictTableSeeder::class);
+        // User::create([
+        //     'name'=>'Adminstrator',
+        //     'email'=>'admin@tagcotz.com',
+        //     'password'=>bcrypt('TagcoTz*')
         // ]);
-        $this->call(RegionsAndDistrictTableSeeder::class);
-        User::create([
-            'name'=>'Adminstrator',
-            'email'=>'admin@tagcotz.com',
-            'password'=>bcrypt('TagcoTz*')
-        ]);
     }
 }

@@ -7,29 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Attendance extends Model implements HasMedia
+class Attendance extends Model 
 {
-    use HasFactory, InteractsWithMedia;
-    protected $guarded = ['id', 'receipt_file'];
-    protected $appends = ['name', 'receipt'];
-    public function getNameAttribute()
-    {
-        return $this->title . ' ' . $this->first_name . ' ' . $this->last_name;
-    }
+    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'event_id',
+        'paid_amount',
+        'status',
+    ];
+    protected $appends = [ 'receipt'];
+  
     public function getReceiptAttribute()
     {
-        return $this->hasMedia('receipts') ? $this->getFirstMediaUrl('receipts') : null;
+        return null;
     }
-    public function region()
-    {
-        return $this->belongsTo(Region::class);
-    }
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
     }
 }

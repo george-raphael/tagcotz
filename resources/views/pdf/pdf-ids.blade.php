@@ -37,23 +37,23 @@
                             <tr>
                                 <td style="padding-left: 4px; ">
                                     <b>
-                                        {{ $singleCard->name }}
+                                        {{ $singleCard->user->name }}
                                     </b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    {{ $singleCard->institution }}
+                                    {{ $singleCard->user->institution }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Region: {{ $singleCard->region->name }}
+                                    Region: {{ $singleCard->user->region->name }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    District: {{ $singleCard->district->name }}
+                                    District: {{ $singleCard->user->district->name }}
                                 </td>
                             </tr>
                             <tr>

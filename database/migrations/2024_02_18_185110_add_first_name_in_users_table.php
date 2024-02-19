@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreignId('region_id');
             $table->foreignId('district_id');
             $table->string('institution');
-            $table->tinyInteger('type')->default(0);//0 = Normal ,1=Admin
+            $table->string('cheque_number')->nullable();
+            $table->tinyInteger('type')->default(0); //0 = Normal ,1=Admin
             $table->dropColumn('name');
         });
     }

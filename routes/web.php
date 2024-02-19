@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PagesController;
 use App\Models\Attendance;
 use Illuminate\Foundation\Application;
@@ -37,10 +38,16 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
-    Route::get('/attendances', [PagesController::class, 'attendances'])->name('attendances');
-    Route::post(
-        '/{attendance}/update-usajili',
-        [PagesController::class, 'updateUsajili']
-    )->name('update.usajili');
+    Route::get('/attendances/{event}', [PagesController::class, 'attendances'])->name('attendances');
+
+    Route::post('/store-event',[EventController::class, 'store'])->name('event.store');
+    Route::post('/update-event/{event}',[EventController::class, 'update'])->name('event.update');
+    Route::post('/jisajili-event/{event}',[EventController::class, 'jisajili'])->name('event.jisajili');
+    Route::delete('/destroy-event/{event}',[EventController::class, 'destroy'])->name('event.destroy');
+    Route::get('/view-event/{event}',[EventController::class, 'viewEvent'])->name('event.view');
+
+    Route::post('/lipia/{attendance}',[EventController::class, 'lipia'])->name('attendance.lipia');
+    
+    Route::post('/{attendance}/update-usajili',[PagesController::class, 'updateUsajili'])->name('update.usajili');
     Route::post('/{attendance}/delete-usajili', [PagesController::class, 'deleteUsajili'])->name('delete.usajili');
 });

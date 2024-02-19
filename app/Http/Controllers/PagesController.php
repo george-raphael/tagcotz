@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EventStatus;
 use Image;
 use Inertia\Inertia;
 use App\Models\Region;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\UsajiriRequest;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
@@ -20,14 +22,14 @@ class PagesController extends Controller
 {
     public function dashboard()
     {
-        $data['verified'] = Attendance::where('status', 'verified')
-            ->count();
-        $data['unverified'] = Attendance::where('status', 'unverified')
-            ->count();
-        $data['invalid'] = Attendance::where('status', 'invalid')
-            ->count();
-        $data['all'] = Attendance::count();
 
+        if (auth()->user()->type == 1) {
+            $data['res']['events'] = Event::latest()->limit(10)->get();
+        } else {
+            $event = Event::where('status',1)->first();
+            $event['attendance'] = $event->attendance();
+            $data['res']['event'] = $event;
+        }
         return inertia('Dashboard', $data);
     }
 
@@ -39,18 +41,21 @@ class PagesController extends Controller
         return Excel::download(new AttendanceExport($searchQuery, $status), ucfirst($status) . ' ' . now()->format('Y-m-d') . '.xlsx');
     }
 
-    public function attendances()
+    public function attendances(Event $event)
     {
         $status = request('status');
 
-        $data['attendees'] = Attendance::when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
+        $attendees = $event->attendencies()->when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
             $query->where('status', $status);
         })
-            ->with(['region', 'district', 'user:id,first_name,last_name,title'])
-            ->latest()
-            ->paginate(20)
+            ->with(['user:id,first_name,last_name,phone_number,email,institution,title,region_id,district_id', 'user.region', 'user.district'])
+            ->latest();
+        $data['res']['attendeesData'] = $attendees->paginate(20)
             ->withQueryString();
-        $data['status'] = $status;
+        $data['res']['status'] = $status;
+        $data['res']['totalCount'] = $attendees->count();
+
+        $data['res']['eventProp'] = $event;
 
         return inertia('Attendance', $data);
     }
@@ -131,10 +136,12 @@ class PagesController extends Controller
 
     public function getVerifiedIdAPI()
     {
-
+        $event = Event::where('status', EventStatus::ACTIVE->getValue())->latest()->first();
         $attendance = array_map(function ($value) {
             return "TAGCOTZ-" . $value;
-        }, [...Attendance::where('status', 'verified')->pluck('id')]);
+        }, [
+            ...$event->attendencies()->where('status', 'verified')->pluck('id')
+        ]);
         return response()->json([
             'success' => true,
             'data' => $attendance,
@@ -142,9 +149,9 @@ class PagesController extends Controller
         ]);
     }
     //IDS
-    public function printIds()
+    public function printIds(Event $event)
     {
-        $data['attendees'] = Attendance::query()->where('status', 'verified')->orderBy('id', 'asc')->get()->chunk(2);
+        $data['attendees'] = $event->attendencies()->where('status', 'verified')->orderBy('id', 'asc')->get()->chunk(2);
         $pdf = PDF::loadView('pdf.pdf-ids', $data);
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('TAGCOTZ-ids.pdf');

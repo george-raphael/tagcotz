@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0a8c847e8a6ad2325c4367ce74b0f7b",
+    "content-hash": "01354a2d9e95a13931ff731aa583d230",
     "packages": [
+        {
+            "name": "alphaolomi/swahilies-php",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alphaolomi/swahilies-php.git",
+                "reference": "deca532ed60577e3e0fcecaa100fdfaf8153bbd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alphaolomi/swahilies-php/zipball/deca532ed60577e3e0fcecaa100fdfaf8153bbd0",
+                "reference": "deca532ed60577e3e0fcecaa100fdfaf8153bbd0",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.5",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.2",
+                "pestphp/pest": "^1.20",
+                "spatie/pest-plugin-snapshots": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Alphaolomi\\Swahilies\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alpha Olomi",
+                    "email": "alphaolomi@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Swahilies for PHP",
+            "homepage": "https://github.com/alphaolomi/swahilies-php",
+            "keywords": [
+                "alphaolomi",
+                "swahilies pay",
+                "swahilies-php"
+            ],
+            "support": {
+                "issues": "https://github.com/alphaolomi/swahilies-php/issues",
+                "source": "https://github.com/alphaolomi/swahilies-php/tree/v0.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/alphaolomi",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2023-01-17T12:45:03+00:00"
+        },
         {
             "name": "aws/aws-crt-php",
             "version": "v1.2.4",
@@ -8262,6 +8321,90 @@
     ],
     "packages-dev": [
         {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v3.10.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "d1a48965f2b25a6cec2eea07d719b568a37c9a88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/d1a48965f2b25a6cec2eea07d719b568a37c9a88",
+                "reference": "d1a48965f2b25a6cec2eea07d719b568a37c9a88",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^9|^10|^11",
+                "illuminate/session": "^9|^10|^11",
+                "illuminate/support": "^9|^10|^11",
+                "maximebf/debugbar": "~1.20.1",
+                "php": "^8.0",
+                "symfony/finder": "^6|^7"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench-dusk": "^5|^6|^7|^8|^9",
+                "phpunit/phpunit": "^8.5.30|^9.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.10-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\Debugbar\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Debugbar": "Barryvdh\\Debugbar\\Facades\\Debugbar"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "support": {
+                "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.5"
+            },
+            "funding": [
+                {
+                    "url": "https://fruitcake.nl",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-15T10:45:45+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "2.0.0",
             "source": {
@@ -8646,6 +8789,72 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2024-01-30T03:03:59+00:00"
+        },
+        {
+            "name": "maximebf/debugbar",
+            "version": "v1.20.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "484625c23a4fa4f303617f29fcacd42951c9c01d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/484625c23a4fa4f303617f29fcacd42951c9c01d",
+                "reference": "484625c23a4fa4f303617f29fcacd42951c9c01d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8",
+                "psr/log": "^1|^2|^3",
+                "symfony/var-dumper": "^4|^5|^6|^7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=7.5.20 <10.0",
+                "twig/twig": "^1.38|^2.7|^3.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.20-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\": "src/DebugBar/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug",
+                "debugbar"
+            ],
+            "support": {
+                "issues": "https://github.com/maximebf/php-debugbar/issues",
+                "source": "https://github.com/maximebf/php-debugbar/tree/v1.20.2"
+            },
+            "time": "2024-02-15T10:49:09+00:00"
         },
         {
             "name": "mockery/mockery",
