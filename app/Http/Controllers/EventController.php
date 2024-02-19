@@ -49,7 +49,7 @@ class EventController extends Controller
     {
         $fields = $request->validate([
             'name' => 'required|string',
-            'status' => 'required|string',
+            'status' => 'required|integer',
             'year' => 'required|string',
             'amount' => 'required|integer',
             'event_date' => 'required|string|date'
@@ -63,7 +63,7 @@ class EventController extends Controller
 
         $fields = $request->validate([
             'name' => 'required|string',
-            'status' => 'required|string',
+            'status' => 'required|integer',
             'year' => 'required|string',
             'amount' => 'required|integer',
             'event_date' => 'required|string|date'

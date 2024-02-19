@@ -24,14 +24,14 @@ class Event extends Model
         'status'=> EventStatus::class
     ];
 
-    protected $appends  = ['attendeesCount','statusLabel'];
+    protected $appends  = ['attendeesCount','statusLabel','formattedEventDate'];
 
     function getAttendeesCountAttribute(): int
     {
         return $this->attendencies()->count();
     }
 
-    function getEventDateAttribute($value): string
+    function getFormattedEventDateAttribute($value): string
     {
         return Carbon::parse($value)->format('D d M y');
     }

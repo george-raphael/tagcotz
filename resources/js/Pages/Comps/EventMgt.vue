@@ -133,7 +133,7 @@
                             {{ event.year }}
                         </td>
                         <td class="border px-2 border-slate-300">
-                            {{ event.event_date }}
+                            {{ event.formattedEventDate }}
                         </td>
                         <td class="border px-2 border-slate-300 ">
                             <span v-if="event.statusLabel ==
