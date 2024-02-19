@@ -78,7 +78,7 @@ class EventController extends Controller
             'user_id' => auth()->id(),
             'event_id' => $event->id
         ]);
-        return redirect()->back()->with('success', 'Umefanikiwa kujisajili');
+        return redirect()->back()->with('success', 'Umefanikiwa kujisajili, Fanya malipo!');
     }
 
     public function destroy(Event $event)

@@ -105,10 +105,13 @@
                             Jisajili
                             </Link>
                             <template v-else>
-                                <button v-if="res.event.attendance?.status === 'unverified'" @click.prevent="handleMalipo"
-                                    class="px-2 rounded-md border-blue-700 font-bold py-2 border text-blue-800 hover:text-blue-700 hover:border-blue-600 mx-2">
+                            <template v-if="res.event.attendance?.status === 'unverified'">
+                                <button @click.prevent="handleMalipo"
+                                    class="px-2 rounded-md border-blue-700 font-bold py-1 border text-blue-800 hover:text-blue-700 hover:border-blue-600 mx-2">
                                     Fanya Malipo
                                 </button>
+                                <Link class="underline text-blue-500" :href="route('dashboard')">Refresh</Link>
+                            </template>
                                 <span v-else class="text-green-500 ">Paid</span>
                             </template>
                         </td>
