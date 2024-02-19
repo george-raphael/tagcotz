@@ -99,7 +99,7 @@
                         </td>
 
                         <td class="px-2 py-1  flex items-center gap-1">
-                            <Link v-if="!res.event.attendance" as="button" method="POST"
+                            <Link v-if="res.event && !res.event.attendance" as="button" method="POST"
                                 :href="route('event.jisajili', { event: res.event.id })"
                                 class="px-2 rounded-md border-blue-700 font-bold py-2 border text-blue-800 hover:text-blue-700 hover:border-blue-600 mx-2">
                             Jisajili
