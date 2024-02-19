@@ -27,13 +27,13 @@
                                     <div class="">
                                         <InputLabel for="amount" class="dark:text-white">Joining Amount</InputLabel>
                                         <TextInput id="amount" v-model="form.amount" type="number" class="w-full"
-                                            placeholder="150,000" />
+                                            placeholder="300000" />
                                         <InputError :message="form.errors.amount" />
                                     </div>
                                     <div class="">
                                         <InputLabel for="year" class="dark:text-white">Year</InputLabel>
                                         <TextInput id="year" v-model="form.year" type="text" class="w-full"
-                                            placeholder="2023-2024" />
+                                            placeholder="2024" />
                                         <InputError :message="form.errors.year" />
                                     </div>
                                     <div class="">
