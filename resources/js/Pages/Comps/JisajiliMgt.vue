@@ -105,7 +105,7 @@
                             Jisajili
                             </Link>
                             <template v-else>
-                                <button v-if="res.event.attendance.status === 'unverified'" @click.prevent="handleMalipo"
+                                <button v-if="res.event.attendance?.status === 'unverified'" @click.prevent="handleMalipo"
                                     class="px-2 rounded-md border-blue-700 font-bold py-2 border text-blue-800 hover:text-blue-700 hover:border-blue-600 mx-2">
                                     Fanya Malipo
                                 </button>

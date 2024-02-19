@@ -27,7 +27,7 @@ class PagesController extends Controller
             $data['res']['events'] = Event::latest()->limit(10)->get();
         } else {
             $event = Event::where('status',1)->first();
-            $event['attendance'] = $event->attendance();
+            $event['attendance'] = $event?->attendance();
             $data['res']['event'] = $event;
         }
         return inertia('Dashboard', $data);
