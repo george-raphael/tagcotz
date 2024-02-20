@@ -100,38 +100,40 @@
             <th class="text-left bg-slate-300 border border-slate-50 py-3 px-2">
               Event Name
             </th>
-            <th class="text-left bg-slate-300 border border-slate-50 py-3 px-2">
+            <th class="hidden sm:table-cell text-left bg-slate-300 border border-slate-50 py-3 px-2">
               Joining Amount
             </th>
-            <th class="text-left bg-slate-300 border border-slate-50 py-3 px-2">
+            <th
+              class="hidden sm:table-cell text-left bg-slate-300 border border-slate-50 py-3 px-2"
+            >
               Event Year
             </th>
-            <th class="text-left bg-slate-300 border border-slate-50 py-3 px-2">
+            <th
+              class="hidden sm:table-cell text-left bg-slate-300 border border-slate-50 py-3 px-2"
+            >
               Event Date
             </th>
 
-            <th class="text-left bg-slate-300 border border-slate-50 py-3 px-2">
-              
-            </th>
+            <th
+              class="text-left bg-slate-300 border border-slate-50 py-3 px-2"
+            ></th>
           </tr>
         </thead>
         <tbody>
           <tr v-if="res.event">
-            <td class="border px-2 py-2 border-slate-300">
-              1 
-            </td>
+            <td class="border px-2 py-2 border-slate-300">1</td>
             <td class="border px-2 border-slate-300">
               <p>{{ res.event.name }}</p>
             </td>
-            <td class="border px-2 border-slate-300">
+            <td class="hidden sm:table-cell border px-2 border-slate-300">
               <p class="font-bold">
                 {{ currencyFormat(res.event.amount) }} TZS
               </p>
             </td>
-            <td class="border px-2 border-slate-300">
+            <td class="hidden sm:table-cell border px-2 border-slate-300">
               {{ res.event.year }}
             </td>
-            <td class="border px-2 border-slate-300">
+            <td class="hidden sm:table-cell border px-2 border-slate-300">
               {{ res.event.event_date }}
             </td>
 
@@ -156,7 +158,9 @@
                   <Link
                     class="underline text-blue-500"
                     :href="
-                      route('dashboard', { orderId: res.event.attendance?.order_number })
+                      route('dashboard', {
+                        orderId: res.event.attendance?.order_number,
+                      })
                     "
                     >Refresh</Link
                   >
