@@ -36,10 +36,10 @@ class Payment
                 $attendance = Attendance::where('order_number', $orderId)->first();
                 if ($attendance->status != 'verified') {
                     $attendance->update([
-                        'status' => 'verified'
+                        'status' => 'verified',
+                        'paid_amount' => $hasPaid['amount']
                     ]);
                 }
-
                 return [
                     'status' => 'verified'
                 ];
