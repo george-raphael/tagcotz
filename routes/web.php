@@ -25,7 +25,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->middleware(['guest']);
 
 Route::get('/usajili', [PagesController::class, 'usajili'])->name('usajili');
 Route::get('/successful', [PagesController::class, 'successful'])->name('successful');

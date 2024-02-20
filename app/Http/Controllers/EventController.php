@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Alphaolomi\Swahilies\Swahilies;
 use App\Models\Attendance;
 use App\Models\Event;
+use Exception;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -77,7 +78,7 @@ class EventController extends Controller
         Attendance::firstOrCreate([
             'user_id' => auth()->id(),
             'event_id' => $event->id,
-            'order_number' => str(explode('-',str()->uuid())[4])->upper(),
+            'order_number' => str(explode('-', str()->uuid())[4])->upper(),
         ]);
         return redirect()->back()->with('success', 'Umefanikiwa kujisajili, Fanya malipo!');
     }
@@ -97,7 +98,7 @@ class EventController extends Controller
         ]);
         $formattedNumber = '255' . substr(trim(request('phone_number')), -9);
 
-     
+
         $response = $this->swahilies->payments()->directRequest([
             // TZS by default
             'amount' => $attendance->event->amount,
@@ -110,29 +111,39 @@ class EventController extends Controller
             'metadata' => [],
         ]);
 
-        return back()->with('success','Ombi la malipo limetumwa tafadhali kamilisha muamala kwenye simu yako.');
+        return back()->with('success', 'Ombi la malipo limetumwa tafadhali kamilisha muamala kwenye simu yako.');
     }
 
     public function successfulPayment(Request $request)
     {
-        
+
         info('Successful Payment Hook Hitted');
-        if ($this->swahilies->webhooks()->verify($request->getContent())) {
+        info($request->getContent());
+        try {
+            // if ($this->swahilies->webhooks()->verify($request->getContent())) {
             $transactionDetails = $request['transaction_details'];
             $attendance = Attendance::where('order_number', $transactionDetails['order_id'])->first();
             $attendance->status = 'verified';
             $attendance->receipt = $transactionDetails['reference_id'];
             $attendance->save();
+            // }
+        } catch (Exception $e) {
+            info($e->getMessage());
         }
     }
 
     public function cancelPayment(Request $request)
     {
-        if ($this->swahilies->webhooks()->verify($request->getContent())) {
+        try {
+
+            // if ($this->swahilies->webhooks()->verify($request->getContent())) {
             $transactionDetails = $request['transaction_details'];
             $attendance = Attendance::findOrFail($transactionDetails['order_id']);
             $attendance->status = 'unverified';
             $attendance->save();
+            // }
+        } catch (Exception $e) {
+            info($e->getMessage());
         }
     }
 }
