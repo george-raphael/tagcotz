@@ -13,6 +13,7 @@ class Attendance extends Model
     protected $fillable = [
         'user_id',
         'event_id',
+        'order_number',
         'paid_amount',
         'status',
     ];

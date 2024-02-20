@@ -76,7 +76,8 @@ class EventController extends Controller
     {
         Attendance::firstOrCreate([
             'user_id' => auth()->id(),
-            'event_id' => $event->id
+            'event_id' => $event->id,
+            'order_number' => str(explode('-',str()->uuid())[4])->upper(),
         ]);
         return redirect()->back()->with('success', 'Umefanikiwa kujisajili, Fanya malipo!');
     }
@@ -101,7 +102,7 @@ class EventController extends Controller
             // TZS by default
             'amount' => $attendance->event->amount,
             // 255 is country code for Tanzania, Only Tanzania is supported for now
-            'orderId' => $attendance->id,
+            'orderId' => $attendance->order_number,
             'phoneNumber' => $formattedNumber,
             'cancelUrl' => "https://tagcotz.com/api/cancel",
             'webhookUrl' => "https://tagcotz.com/api/response",
@@ -118,11 +119,10 @@ class EventController extends Controller
         info('Successful Payment Hook Hitted');
         if ($this->swahilies->webhooks()->verify($request->getContent())) {
             $transactionDetails = $request['transaction_details'];
-            $attendance = Attendance::where('id', $transactionDetails['order_id'])->first();
+            $attendance = Attendance::where('order_number', $transactionDetails['order_id'])->first();
             $attendance->status = 'verified';
             $attendance->receipt = $transactionDetails['reference_id'];
             $attendance->save();
-
         }
     }
 

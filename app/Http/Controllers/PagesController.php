@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\UsajiriRequest;
 use App\Models\Event;
+use App\Services\Payment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
@@ -23,15 +24,20 @@ class PagesController extends Controller
     public function dashboard()
     {
 
+        if (request()->filled('orderId')) {
+            (new Payment())->checkOrderStatus(request('orderId'));
+        }
+
         if (auth()->user()->type == 1) {
             $data['res']['events'] = Event::latest()->limit(10)->get();
         } else {
-            $event = Event::where('status',1)->first();
-            if($event){
+            $event = Event::where('status', 1)->first();
+            if ($event) {
                 $event['attendance'] = $event?->attendance();
             }
             $data['res']['event'] = $event;
         }
+
         return inertia('Dashboard', $data);
     }
 
