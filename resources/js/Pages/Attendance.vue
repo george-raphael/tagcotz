@@ -13,7 +13,7 @@ import {
 import { onMounted, ref } from "@vue/runtime-core";
 import { router } from "@inertiajs/vue3";
 const { res } = defineProps(["res"]);
-const attendeesData = ref({ ...res.attendees });
+const attendeesData = ref({ ...res.attendeesData });
 const activeAttendee = ref(null);
 const activeIndex = ref(null);
 const isLoading = ref(false);
@@ -166,7 +166,7 @@ function capitalize(string) {
             <div class="px-4 sm:px-12 bg-white">
               <div class="flex sm:flex-row flex-col justify-between">
                 <div class="text-2xl">
-                  {{ capitalize(res.status) }} ({{ res.totalCount }})
+                  {{ capitalize(res.status) }} ({{ attendeesData.total }})
                 </div>
                 <div
                   class="flex sm:flex-row flex-col-reverse space-x-2 items-center"
@@ -210,7 +210,7 @@ function capitalize(string) {
                       :href="
                         route('dashboard.export', {
                           searchQuery: searchQuery,
-                          status: status,
+                          status: res.status,
                         })
                       "
                       target="_blank"
@@ -284,7 +284,7 @@ function capitalize(string) {
                   </thead>
                   <tbody>
                     <tr
-                      v-for="(attendee, index) in res.attendeesData.data"
+                      v-for="(attendee, index) in attendeesData.data"
                       :key="attendee.id"
                     >
                       <td class="border px-2 border-slate-300">
@@ -359,8 +359,8 @@ function capitalize(string) {
                     </tr>
                   </tbody>
                 </table>
-                <div class="mt-3 min-w-full">
-                  <Pagination :items="res.attendeesData" />
+                <div class="mt-3 min-w-full " v-if="attendeesData.data">
+                  <Pagination :items="attendeesData" />
                 </div>
               </div>
               <div v-else class="w-full">

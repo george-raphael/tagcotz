@@ -81,18 +81,12 @@ class PagesController extends Controller
         return Attendance::when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
             $query->where('status', $status);
         })
-            ->where(function ($query) use ($searchQuery) {
-                $query->orWhere('first_name', 'like', '%' . $searchQuery . '%')
-                    ->orWhere('last_name', 'like', '%' . $searchQuery . '%')
-                    ->orWhere('institution', 'like', '%' . $searchQuery . '%')
-                    ->orWhereHas('region', function ($query) use ($searchQuery) {
-                        $query->where('name', 'like', '%' . $searchQuery . '%');
-                    })
-                    ->orWhereHas('district', function ($query) use ($searchQuery) {
-                        $query->where('name', 'like', '%' . $searchQuery . '%');
-                    });
+            ->whereHas('user', function ($query) use ($searchQuery) {
+                $query->where('users.first_name', 'like', '%' . $searchQuery . '%');
+                $query->orWhere('users.last_name', 'like', '%' . $searchQuery . '%');
+                $query->orWhere('users.institution', 'like', '%' . $searchQuery . '%');
             })
-            ->with(['region', 'district'])
+            ->with(['user.region', 'user.district'])
             ->latest()
             ->paginate(20);
     }
