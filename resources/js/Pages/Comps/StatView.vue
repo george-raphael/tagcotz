@@ -10,8 +10,8 @@
                 }}</span>
             </div>
             <div class="text-right">
-                <a :href="route('attendances', { event: res.eventProp.id, status: 'all' })"
-                    class="text-blue-500 hover:underline cursor-pointer">View</a>
+                <Link :href="route('attendances', { event: res.eventProp.id, status: 'all' })"
+                    class="text-blue-500 hover:underline cursor-pointer">View</Link>
             </div>
         </div>
         <div class="col-span-3 bg-white shadow-sm rounded-lg p-3 border-l-8 border-green-500">
@@ -24,8 +24,8 @@
                 }}</span>
             </div>
             <div class="text-right">
-                <a :href="route('attendances', { event: res.eventProp.id, status: 'verified' })"
-                    class="text-blue-500 hover:underline cursor-pointer">View</a>
+                <Link :href="route('attendances', { event: res.eventProp.id, status: 'verified' })"
+                    class="text-blue-500 hover:underline cursor-pointer">View</Link>
             </div>
         </div>
         <div class="col-span-3 bg-white shadow-sm rounded-lg p-3 border-l-8 border-yellow-500">
@@ -38,8 +38,8 @@
                 }}</span>
             </div>
             <div class="text-right">
-                <a :href="route('attendances', { event: res.eventProp.id, status: 'unverified' })"
-                    class="text-blue-500 hover:underline cursor-pointer">View</a>
+                <Link :href="route('attendances', { event: res.eventProp.id, status: 'unverified' })"
+                    class="text-blue-500 hover:underline cursor-pointer">View</Link>
             </div>
         </div>
         <div class="col-span-3 bg-white shadow-sm rounded-lg p-3 border-l-8 border-red-500">
@@ -52,8 +52,8 @@
                 }}</span>
             </div>
             <div class="text-right">
-                <a :href="route('attendances', { event: res.eventProp.id, status: 'invalid' })"
-                    class="text-blue-500 hover:underline cursor-pointer">View</a>
+                <Link :href="route('attendances', { event: res.eventProp.id, status: 'invalid' })"
+                    class="text-blue-500 hover:underline cursor-pointer">View</Link>
             </div>
         </div>
 
