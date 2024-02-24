@@ -37,6 +37,10 @@ class EventController extends Controller
         $data['res']['invalid'] = $event->attendencies()->where('status', 'invalid')
             ->count();
         $data['res']['all'] = $event->attendencies()->count();
+        $data['res']['paidAmount'] = $event->attendencies()
+            ->where('status', 'verified')
+            ->count() * $event->amount;
+        $data['res']['totalAmount'] = $event->attendencies()->count() * $event->amount;
 
         return inertia('ManageEvent', $data);
     }
