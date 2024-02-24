@@ -117,8 +117,6 @@ class EventController extends Controller
     public function successfulPayment(Request $request)
     {
 
-        info('Successful Payment Hook Hitted');
-        info($request->getContent());
         try {
             // if ($this->swahilies->webhooks()->verify($request->getContent())) {
             $transactionDetails = $request['transaction_details'];

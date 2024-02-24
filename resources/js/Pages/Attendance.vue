@@ -112,34 +112,38 @@ function capitalize(string) {
                   class="my-12 flex items-center justify-center text-2xl underline"
                 ></div>
 
-                <div class="mt-4 flex items-center justify-center space-x-2">
-                  <button
-                    @click="deleteAttendance"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-6 py-2 text-lg font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    type="button"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-6 py-2 text-lg font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
-                    @click="closeModal"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-sky-100 px-6 py-2 text-lg font-medium text-sky-900 hover:bg-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
-                    @click="updateAttendeeStatus('invalid')"
-                  >
-                    Not valid
-                  </button>
-                  <button
-                    type="button"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-6 py-2 text-lg font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-                    @click="updateAttendeeStatus('verified')"
-                  >
-                    Verify
-                  </button>
+                <div
+                  class="mt-4 flex flex-col items-center justify-center space-x-2"
+                >
+                  <div class="flex items-center justify-center space-x-2">
+                    <button
+                      @click="deleteAttendance"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-6 py-2 text-lg font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-6 py-2 text-lg font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                      @click="closeModal"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-sky-100 px-6 py-2 text-lg font-medium text-sky-900 hover:bg-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                      @click="updateAttendeeStatus('invalid')"
+                    >
+                      Not valid
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-6 py-2 text-lg font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                      @click="updateAttendeeStatus('verified')"
+                    >
+                      Verify
+                    </button>
+                  </div>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -291,13 +295,17 @@ function capitalize(string) {
                         {{ res.attendeesData?.from + index }}
                       </td>
                       <td class="border px-2 border-slate-300">
-                        <p class=" text-lg font-bold lg:text-normal">{{ attendee.user.name }}</p>
+                        <p class="text-lg font-bold lg:text-normal">
+                          {{ attendee.user.name }}
+                        </p>
                         <a
                           class="lg:hidden text-blue-500 block"
                           :href="'tel: ' + attendee.user.phone_number"
                           >{{ attendee.user.phone_number }}
                         </a>
-                        <span class="lg:hidden"> {{ attendee.user.institution }}</span>
+                        <span class="lg:hidden">
+                          {{ attendee.user.institution }}</span
+                        >
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300"
@@ -348,18 +356,27 @@ function capitalize(string) {
                           {{ attendee.status }}
                         </span>
                       </td>
-                      <td class="border px-2 border-slate-300">
+                      <td class="border px-2 border-slate-300 space-y-3">
                         <button
                           @click.prevent="openModalForAttendee(attendee, index)"
-                          class="underline text-blue-700 mx-2"
+                          class="block underline text-blue-700 mx-2"
                         >
                           View
                         </button>
+                        <Link
+                          class="block underline text-blue-500"
+                          :href="
+                            route('dashboard', {
+                              orderId: res.attendance?.order_number,
+                            })
+                          "
+                          >Refresh</Link
+                        >
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <div class="mt-3 min-w-full " v-if="attendeesData.data">
+                <div class="mt-3 min-w-full" v-if="attendeesData.data">
                   <Pagination :items="attendeesData" />
                 </div>
               </div>

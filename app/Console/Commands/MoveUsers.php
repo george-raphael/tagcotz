@@ -46,7 +46,6 @@ class MoveUsers extends Command
         User::where('id',1)->update(['type'=>1]);
         User::destroy(User::where('id', '>', 1)->pluck('id')->toArray());
         foreach ($attendancies as $attendence) {
-            $this->info($attendence->id);
 
            $user =  User::create([
                 'title' => $attendence['title'],

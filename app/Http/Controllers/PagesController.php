@@ -26,6 +26,7 @@ class PagesController extends Controller
 
         if (request()->filled('orderId')) {
             (new Payment())->checkOrderStatus(request('orderId'));
+            return redirect()->back();
         }
 
         if (auth()->user()->type == 1) {
@@ -64,6 +65,7 @@ class PagesController extends Controller
         $data['res']['totalCount'] = $attendees->count();
 
         $data['res']['eventProp'] = $event;
+        $data['res']['attendance'] = $event->attendance();
 
         return inertia('Attendance', $data);
     }

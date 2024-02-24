@@ -29,7 +29,6 @@ class Payment
         }
 
         $response = $this->swahilies->payments()->find($orderId);
-        info($response);
         if (count($response['order'])) {
             $hasPaid = collect($response['order'])->where('status','paid')->first();
             if ($hasPaid) {
