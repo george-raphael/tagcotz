@@ -57,10 +57,11 @@ class PagesController extends Controller
         $attendees = $event->attendencies()->when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
             $query->where('status', $status);
         })
-            ->with(['user:id,first_name,last_name,phone_number,email,institution,title,region_id,district_id', 'user.region', 'user.district'])
+            ->with(['user:id,first_name,last_name,phone_number,email,institution,title,region_id,district_id', 'user.region', 'user.district', 'paymentAttempts:id,attendance_id,status,transaction_status_number,payment_phone_number'])
             ->latest();
         $data['res']['attendeesData'] = $attendees->paginate(20)
             ->withQueryString();
+            // dd( $data['res']['attendeesData']);
         $data['res']['status'] = $status;
         $data['res']['totalCount'] = $attendees->count();
 

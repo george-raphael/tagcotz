@@ -109,8 +109,35 @@ function capitalize(string) {
                   <b>Manage</b>: {{ activeAttendee.user.name }}
                 </DialogTitle>
                 <div
-                  class="my-12 flex items-center justify-center text-2xl underline"
-                ></div>
+                  class="my-12 flex items-center justify-center text-sm"
+                >
+                  <table class="border border-collapse mt-6 text-gray-500 min-w-full">
+                    <thead>
+                      <tr>
+                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                      >Sn.</th>
+                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                      >Phone</th>
+                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                      >Reference ID</th>
+                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                      >Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="(pa, index) in activeAttendee.payment_attempts"
+                        :key="pa.id"
+                      >
+                        <td class="border px-2 border-slate-300">{{ index+1 }}</td>
+                        <td class="border px-2 border-slate-300">{{ pa.payment_phone_number }}</td>
+                        <td class="border px-2 border-slate-300">{{ pa.transaction_status_number }}</td>
+                        <td class="border capitalize px-2 border-slate-300 py-1"><span :class="pa.status=='paid'?'bg-green-100 text-green-700 shadow-sm border border-green-200 px-2 py-.5 rounded-xl':'bg-yellow-100 text-yellow-700 shadow-sm border border-yellow-200 px-2 py-.5 rounded-xl'">
+                          {{ pa.status }}</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
                 <div
                   class="mt-4 flex flex-col items-center justify-center space-x-2"
