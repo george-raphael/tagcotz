@@ -13,5 +13,7 @@ class PaymentAttempt extends Model
         'attendance_id',
         'merchant_order_number',
         'payment_phone_number',
+        'status',
+        'transaction_status_number'
     ];
 }
