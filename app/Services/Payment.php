@@ -29,7 +29,7 @@ class Payment
         }
 
         $response = $this->swahilies->payments()->find($orderId);
-        if (count($response['order'])) {
+        if (array_key_exists('order', $response) && count($response['order'])) {
             $hasPaid = collect($response['order'])->where('status','paid')->first();
             if ($hasPaid) {
                 $attendance = Attendance::where('order_number', $orderId)->first();
