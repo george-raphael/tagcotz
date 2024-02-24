@@ -367,7 +367,7 @@ function capitalize(string) {
                           class="block underline text-blue-500"
                           :href="
                             route('dashboard', {
-                              orderId: res.attendance?.order_number,
+                              orderId: attendee.order_number,
                             })
                           "
                           >Refresh</Link

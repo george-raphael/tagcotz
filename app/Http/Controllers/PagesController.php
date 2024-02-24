@@ -65,7 +65,6 @@ class PagesController extends Controller
         $data['res']['totalCount'] = $attendees->count();
 
         $data['res']['eventProp'] = $event;
-        $data['res']['attendance'] = $event->attendance();
 
         return inertia('Attendance', $data);
     }
