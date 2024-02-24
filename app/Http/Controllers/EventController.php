@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Alphaolomi\Swahilies\Swahilies;
 use App\Models\Attendance;
 use App\Models\Event;
+use App\Models\PaymentAttempt;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -96,9 +97,36 @@ class EventController extends Controller
         request()->validate([
             'phone_number' => 'required|string|min:10|max:15'
         ]);
+
         $formattedNumber = '255' . substr(trim(request('phone_number')), -9);
 
+        try {
+            $response = $this->swahilies->payments()->directRequest([
+                // TZS by default
+                'amount' => $attendance->event->amount,
+                // 255 is country code for Tanzania, Only Tanzania is supported for now
+                'orderId' => $attendance->order_number,
+                'phoneNumber' => $formattedNumber,
+                'cancelUrl' => "https://tagcotz.com/api/cancel",
+                'webhookUrl' => "https://tagcotz.com/api/response",
+                'successUrl' => "https://tagcotz.com/api/success",
+                'metadata' => [],
+            ]);
 
+            $attendance->update([
+                'merchant_order_number' => $response['transaction_id'],
+                'payment_phone_number' => $formattedNumber,
+            ]);
+
+            $attendance->paymentAttempts()->create([
+                'merchant_order_number' => $response['transaction_id'],
+                'payment_phone_number' => $formattedNumber,
+            ]);
+
+            return back()->with('success', 'Ombi la malipo limetumwa tafadhali kamilisha muamala kwenye simu yako.');
+        } catch (Exception $e) {
+            return back()->with('success', 'Kuna shida ya mtandao jaribu tena!');
+        }
         $response = $this->swahilies->payments()->directRequest([
             // TZS by default
             'amount' => $attendance->event->amount,
@@ -118,13 +146,13 @@ class EventController extends Controller
     {
 
         try {
-            // if ($this->swahilies->webhooks()->verify($request->getContent())) {
+            info('Hit in Successful Payment Hook');
+            info($request['transaction_details']);
             $transactionDetails = $request['transaction_details'];
             $attendance = Attendance::where('order_number', $transactionDetails['order_id'])->first();
             $attendance->status = 'verified';
             $attendance->receipt = $transactionDetails['reference_id'];
             $attendance->save();
-            // }
         } catch (Exception $e) {
             info($e->getMessage());
         }
@@ -133,13 +161,10 @@ class EventController extends Controller
     public function cancelPayment(Request $request)
     {
         try {
-
-            // if ($this->swahilies->webhooks()->verify($request->getContent())) {
             $transactionDetails = $request['transaction_details'];
-            $attendance = Attendance::findOrFail($transactionDetails['order_id']);
+            $attendance = Attendance::where('order_number', $transactionDetails['order_id'])->first();
             $attendance->status = 'unverified';
             $attendance->save();
-            // }
         } catch (Exception $e) {
             info($e->getMessage());
         }
