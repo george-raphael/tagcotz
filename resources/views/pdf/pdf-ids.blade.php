@@ -17,7 +17,7 @@
     @foreach ($attendees as $singleCard)
         <div
             style="
-        background: linear-gradient(rgb(255,255,255), rgba(29, 71, 143,0.3));
+        background: linear-gradient(rgba(29, 71, 143,0.3), rgb(255,255,255), rgb(255,255,255));
              height:100%; padding:6px">
             <table style="width:100%">
                 <tbody>
