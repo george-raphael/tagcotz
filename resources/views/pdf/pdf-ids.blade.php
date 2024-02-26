@@ -61,11 +61,7 @@
                             <p style="padding-top: 20px"><b>District:</b> {{ $singleCard->user->district?->name }}</p>
                         </td>
                     </tr>
-                    <tr style="background-color: whitesmoke">
-                        <td colspan="2" style="text-align: center; font-size: 10px">
-                            <i>-{{ date('Y', time()) }}-</i>
-                        </td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
