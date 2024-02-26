@@ -176,9 +176,10 @@ class PagesController extends Controller
         })
         ->with('user.region', 'user.district')
         ->where('id_printed',false)
-        ->orderBy('user.first_name','asc')
         // ->where('status', 'verified')->orderBy('id', 'asc')
-        ->get();
+        // ->limit(10)
+        ->get()
+        ->sortBy('user.first_name');
 
         $pdf = PDF::loadView('pdf.pdf-ids', $data);
         
