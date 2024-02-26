@@ -117,8 +117,8 @@ class PagesController extends Controller
         $data = request()->validate([
             'status' => 'required|string',
         ]);
-        $attendance->update($data + ['user_id' => auth()->id()]);
-        return redirect()->route('dashboard');
+        $attendance->update($data+['payment_method'=>'MANUAL']);
+        return redirect()->back();
     }
     public function deleteUsajili(Attendance $attendance)
     {

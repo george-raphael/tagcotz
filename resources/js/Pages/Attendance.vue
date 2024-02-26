@@ -322,11 +322,16 @@ function capitalize(string) {
                       >
                         Institution
                       </th>
-                      <th
+                       <th
+                        class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                      >
+                        Payment Method
+                      </th>
+                      <!-- <th
                         class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
                       >
                         Payment Status
-                      </th>
+                      </th> -->
                       <th
                         class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
                       >
@@ -353,8 +358,8 @@ function capitalize(string) {
                             attendee.user?.name
                           }}</span>
                           <span class="text-sm block">
-                            {{ attendee.user?.district.name }},
-                            {{ attendee.user?.region.name }}</span
+                            {{ attendee.user?.district?.name }},
+                            {{ attendee.user?.region?.name }}</span
                           >
                         </p>
                         <a
@@ -383,14 +388,18 @@ function capitalize(string) {
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
                         {{ attendee.user?.institution }}
+                      </td><td
+                        class="hidden lg:table-cell border px-2 border-slate-300 text-center"
+                      >
+                        {{ attendee.payment_method }}
                       </td>
-                      <td
+                      <!-- <td
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
                         {{ attendee.payment_attempts?.filter((pa)=>
                           pa.status == 'paid'
                         )?.[0]?.status }}
-                      </td>
+                      </td> -->
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300 text-center"
                       >

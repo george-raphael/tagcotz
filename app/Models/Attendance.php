@@ -19,6 +19,7 @@ class Attendance extends Model
         'status',
         'merchant_order_number',
         'payment_phone_number',
+        'payment_method',
         'crawled'
     ];
     protected $appends = ['receipt'];

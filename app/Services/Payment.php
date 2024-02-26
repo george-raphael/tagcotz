@@ -35,12 +35,13 @@ class Payment
                 $hasPaid = collect($response['order'])->where('status', 'paid')->first();
                 if ($hasPaid) {
                     $attendance = Attendance::where('order_number', $orderId)->first();
-                    if ($attendance->status != 'verified') {
+                    // if ($attendance->status != 'verified') {
                         $attendance->update([
                             'status' => 'verified',
+                            'payment_method'=>'ONLINE',
                             'paid_amount' => $hasPaid['amount']
                         ]);
-                    }
+                    // }
                     return [
                         'status' => 'verified'
                     ];
