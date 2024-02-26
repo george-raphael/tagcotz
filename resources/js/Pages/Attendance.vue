@@ -389,7 +389,7 @@ function capitalize(string) {
                       >
                         {{ attendee.payment_attempts?.filter((pa)=>
                           pa.status == 'paid'
-                        )?.[0].status }}
+                        )?.[0]?.status }}
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300 text-center"
