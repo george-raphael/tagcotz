@@ -186,6 +186,6 @@ class PagesController extends Controller
         Attendance::whereIn('id', $data['attendees']->pluck('id'))
         ->update(['id_printed'=>true]);
 
-        return $pdf->download('TAGCOTZ-ids.pdf');
+        return $pdf->download($data['attendees']->count().'TAGCOTZ-ids.pdf');
     }
 }
