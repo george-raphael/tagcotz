@@ -176,7 +176,7 @@ class PagesController extends Controller
         })
         ->with('user.region', 'user.district')
         ->where('id_printed',false)
-        ->orderBy('first_name','asc')
+        ->orderBy('user.first_name','asc')
         // ->where('status', 'verified')->orderBy('id', 'asc')
         ->get();
 
