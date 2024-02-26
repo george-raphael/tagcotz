@@ -20,7 +20,8 @@ class Attendance extends Model
         'merchant_order_number',
         'payment_phone_number',
         'payment_method',
-        'crawled'
+        'crawled',
+        'id_printed'
     ];
     protected $appends = ['receipt'];
 
