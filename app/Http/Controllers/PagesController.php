@@ -177,7 +177,7 @@ class PagesController extends Controller
         ->with('user.region', 'user.district')
         ->where('id_printed',false)
         // ->where('status', 'verified')->orderBy('id', 'asc')
-        // ->limit(10)
+        ->limit(190)
         ->get()
         ->sortBy('user.first_name');
 
