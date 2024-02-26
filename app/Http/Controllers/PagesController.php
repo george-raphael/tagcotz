@@ -89,16 +89,15 @@ class PagesController extends Controller
             ->when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
                 $query->where('status', $status);
             })
-            ->where(function($query) use($searchQuery){
-                $query->
-                orWhereHas('user', function ($query) use ($searchQuery) {
-                    $query->where('users.first_name', 'like', '%' . $searchQuery . '%');
-                    $query->orWhere('users.last_name', 'like', '%' . $searchQuery . '%');
-                    $query->orWhere('users.institution', 'like', '%' . $searchQuery . '%');
-                })
-                ->orWhereHas('paymentAttempts', function ($query) use ($searchQuery) {
-                    $query->where('payment_attempts.payment_phone_number', 'like', '%' . $searchQuery . '%');
-                });
+            ->where(function ($query) use ($searchQuery) {
+                $query->orWhereHas('user', function ($query) use ($searchQuery) {
+                        $query->where('users.first_name', 'like', '%' . $searchQuery . '%');
+                        $query->orWhere('users.last_name', 'like', '%' . $searchQuery . '%');
+                        $query->orWhere('users.institution', 'like', '%' . $searchQuery . '%');
+                    })
+                    ->orWhereHas('paymentAttempts', function ($query) use ($searchQuery) {
+                        $query->where('payment_attempts.payment_phone_number', 'like', '%' . $searchQuery . '%');
+                    });
             })
             ->with(['user.region', 'user.district', 'paymentAttempts'])
             ->latest()
@@ -117,7 +116,11 @@ class PagesController extends Controller
         $data = request()->validate([
             'status' => 'required|string',
         ]);
-        $attendance->update($data+['payment_method'=>'MANUAL']);
+        $append = ['payment_method' => null];
+        if ($data['status'] == 'verified') {
+            $append = ['payment_method' => 'MANUAL'];
+        }
+        $attendance->update($data + $append);
         return redirect()->back();
     }
     public function deleteUsajili(Attendance $attendance)

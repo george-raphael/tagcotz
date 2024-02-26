@@ -33,9 +33,6 @@ function updateAttendeeStatus(status) {
     route("update.usajili", { attendance: activeAttendee.value.id }),
     { status: status },
     {
-      onFinish: () => {
-        router.get(route("dashboard"));
-      },
       preserveScroll: true,
     }
   );
