@@ -55,7 +55,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="font-size:.8em">
+                        <td style="font-size:.8em; padding-left:10px">
                             <p style="padding-top: 20px"><b>Venue:</b> AICC </p>
                             <p style="padding-top: 20px"><b>Region:</b> {{ $singleCard->user->region?->name }}</p>
                             <p style="padding-top: 20px"><b>District:</b> {{ $singleCard->user->district?->name }}</p>
