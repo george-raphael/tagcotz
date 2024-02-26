@@ -327,11 +327,11 @@ function capitalize(string) {
                         </p>
                         <a
                           class="lg:hidden text-blue-500 block"
-                          :href="'tel: ' + attendee.user.phone_number"
-                          >{{ attendee.user.phone_number }}
+                          :href="'tel: ' + attendee.user?.phone_number"
+                          >{{ attendee.user?.phone_number }}
                         </a>
                         <span class="lg:hidden">
-                          {{ attendee.user.institution }}</span
+                          {{ attendee.user?.institution }}</span
                         >
                       </td>
                       <td
@@ -340,26 +340,26 @@ function capitalize(string) {
                         <p>
                           <a
                             class="text-blue-500 block"
-                            :href="'tel: ' + attendee.user.phone_number"
-                            >{{ attendee.user.phone_number }}
+                            :href="'tel: ' + attendee.user?.phone_number"
+                            >{{ attendee.user?.phone_number }}
                           </a>
                         </p>
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
-                        {{ attendee.user.email }}
+                        {{ attendee.user?.email }}
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
-                        {{ attendee.user.district.name }},
-                        {{ attendee.user.region.name }}
+                        {{ attendee.user?.district.name }},
+                        {{ attendee.user?.region.name }}
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
-                        {{ attendee.user.institution }}
+                        {{ attendee.user?.institution }}
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300 text-center"
