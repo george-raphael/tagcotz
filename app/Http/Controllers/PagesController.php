@@ -171,12 +171,19 @@ class PagesController extends Controller
     public function printIds(Event $event)
     {
         $data['attendees'] = $event->attendencies()
+        ->when(request()->filled('attendance_id'), function($query){
+            $query->where('id',request('attendance_id'));
+        })
         ->with('user.region', 'user.district')
+        ->where('id_printed',false)
         ->where('status', 'verified')->orderBy('id', 'asc')
         ->get();
 
         $pdf = PDF::loadView('pdf.pdf-ids', $data);
-    
+        
+        Attendance::whereIn('id', $data['attendees']->pluck('id'))
+        ->update(['id_printed'=>true]);
+
         return $pdf->stream('TAGCOTZ-ids.pdf');
     }
 }

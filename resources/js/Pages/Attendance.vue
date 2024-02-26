@@ -436,6 +436,17 @@ function capitalize(string) {
                           "
                           >Refresh</Link
                         >
+                        <a
+                          target="_blank"
+                          class="block underline text-green-500"
+                          :href="
+                            route('dashboard.print.ids', {
+                              event: attendee.event_id,
+                              attendance_id: attendee.id,
+                            })
+                          "
+                          >Print ID</a
+                        >
                       </td>
                     </tr>
                   </tbody>
