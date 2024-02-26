@@ -323,7 +323,7 @@ function capitalize(string) {
                       </td>
                       <td class="border px-2 border-slate-300">
                         <p class="text-lg font-bold lg:text-normal">
-                          {{ attendee.user.name }}
+                          {{ attendee.user?.name }}
                         </p>
                         <a
                           class="lg:hidden text-blue-500 block"
