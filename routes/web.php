@@ -18,6 +18,10 @@ use Inertia\Inertia;
 |
 */
 
+// Route::get('/test', function(){
+//     echo phpinfo();
+// });
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

@@ -170,9 +170,13 @@ class PagesController extends Controller
     //IDS
     public function printIds(Event $event)
     {
-        $data['attendees'] = $event->attendencies()->where('status', 'verified')->orderBy('id', 'asc')->get()->chunk(2);
+        $data['attendees'] = $event->attendencies()
+        ->with('user.region', 'user.district')
+        ->where('status', 'verified')->orderBy('id', 'asc')
+        ->get();
+
         $pdf = PDF::loadView('pdf.pdf-ids', $data);
-        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+    
         return $pdf->stream('TAGCOTZ-ids.pdf');
     }
 }

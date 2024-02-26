@@ -6,77 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TAGCOTZ</title>
+    <style>
+        @page {
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-    <table style="width: 100%; ">
-        @foreach ($attendees as $key => $attendee)
-            <tr>
-                @foreach ($attendee as $singleCard)
-                    <td style="width: 85.6mm;height: 53.98mm; border: 2px dotted black;padding: 6px;margin: 6px">
-                        <table style="width: 100%;">
-                            <tr>
-                                <td>
-                                    <img src="{{ public_path('img/logo.png') }}" style="height: 50px; width: 50px;"
-                                        alt="Logo">
-                                </td>
-                                <td style="font-size: 18px;  font-weight: bold">TAGCOTZ</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; font-size: 14px">
-                                    {{--  <b>{{ $singleCard->name }}</b>  --}}
-                                </td>
-                                <td rowspan="6" style="width: 70px;">
-                                    {!! str_replace(
-                                        '<?xml version="1.0" encoding="UTF-8"?>',
-                                        '',
-                                        QrCode::size(130)->generate('TAGCOTZ-' . $singleCard->id),
-                                    ) !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 4px; ">
-                                    <b>
-                                        {{ $singleCard->user->name }}
-                                    </b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    {{ $singleCard->user->institution }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Region: {{ $singleCard->user->region->name }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    District: {{ $singleCard->user->district->name }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                        Verified By: {{ $singleCard->user?->name }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: center; font-size: 10px">
-                                    <i>-{{ date('Y', time()) }}-</i>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                @endforeach
-                @if (count($attendee) == 1)
-                    <td style="width: 85.6mm;height: 53.98mm; border: 2px dotted black;padding: 6px;margin: 6px">
+    @foreach ($attendees as $singleCard)
+        <div
+            style="
+        background: linear-gradient(rgb(255,255,255), rgba(29, 71, 143,0.3));
+             height:100%; padding:6px">
+            <table style="width:100%">
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="{{ public_path('img/logo.png') }}" style="height: 50px; width: 50px;"
+                                alt="Logo">
+                        </td>
+                        <td style="font-size: 18px;  font-weight: bold; text-align:right">TAGCOTZ</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"
+                            style="text-align: center;  background-color: #1D478F; font-size:.75em; font-weight:bold; color:white">
+                            27-29 Feb 2024</td>
+                    </tr>
+                    <tr style="">
+                        <td colspan="2">
+                            <b>
+                                {{ $singleCard->user->name }}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-size:.6em; text-transform:uppercase;">
+                            {{ $singleCard->user->institution }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" style="width: 70px; ">
+                            {!! str_replace(
+                                '<\?xml version="1.0" encoding="UTF-8"?>',
+                                '',
+                                QrCode::size(70)->generate('TAGCOTZ-' . $singleCard->id),
+                            ) !!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:.8em">
+                            <p style="padding-top: 20px"><b>Venue:</b> AICC </p>
+                            <p style="padding-top: 20px"><b>Region:</b> {{ $singleCard->user->region?->name }}</p>
+                            <p style="padding-top: 20px"><b>District:</b> {{ $singleCard->user->district?->name }}</p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: whitesmoke">
+                        <td colspan="2" style="text-align: center; font-size: 10px">
+                            <i>-{{ date('Y', time()) }}-</i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    @endforeach
 
-                    </td>
-                @endif
-            </tr>
-        @endforeach
-    </table>
 </body>
 
 </html>
