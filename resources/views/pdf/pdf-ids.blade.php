@@ -48,7 +48,7 @@
                     <tr>
                         <td rowspan="2" style="width: 70px; ">
                             {!! str_replace(
-                                '<\?xml version="1.0" encoding="UTF-8"?>',
+                                '<?xml version="1.0" encoding="UTF-8"?>',
                                 '',
                                 QrCode::size(70)->generate('TAGCOTZ-' . $singleCard->id),
                             ) !!}
