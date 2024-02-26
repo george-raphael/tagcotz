@@ -31,7 +31,7 @@ function updateAttendeeStatus(status) {
   isOpen.value = false;
   router.post(
     route("update.usajili", { attendance: activeAttendee.value.id }),
-    { status: res.status },
+    { status: status },
     {
       onFinish: () => {
         router.get(route("dashboard"));
@@ -322,7 +322,7 @@ function capitalize(string) {
                       >
                         Institution
                       </th>
-                       <th
+                      <th
                         class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
                       >
                         Payment Method
@@ -388,7 +388,8 @@ function capitalize(string) {
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
                         {{ attendee.user?.institution }}
-                      </td><td
+                      </td>
+                      <td
                         class="hidden lg:table-cell border px-2 border-slate-300 text-center"
                       >
                         {{ attendee.payment_method }}
