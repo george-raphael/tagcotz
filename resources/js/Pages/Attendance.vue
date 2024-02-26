@@ -57,7 +57,7 @@ const searchAttendees = _.debounce(() => {
       route("search.attendees", {
         searchQuery: searchQuery.value ?? "",
         status: res.status,
-        event_id:  res.eventProp.id,
+        event_id: res.eventProp.id,
       })
     )
     .then(({ data }) => {
@@ -109,20 +109,32 @@ function capitalize(string) {
                 >
                   <b>Manage</b>: {{ activeAttendee.user.name }}
                 </DialogTitle>
-                <div
-                  class="my-12 flex items-center justify-center text-sm"
-                >
-                  <table class="border border-collapse mt-6 text-gray-500 min-w-full">
+                <div class="my-12 flex items-center justify-center text-sm">
+                  <table
+                    class="border border-collapse mt-6 text-gray-500 min-w-full"
+                  >
                     <thead>
                       <tr>
-                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
-                      >Sn.</th>
-                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
-                      >Phone</th>
-                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
-                      >Reference ID</th>
-                        <th class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
-                      >Status</th>
+                        <th
+                          class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                        >
+                          Sn.
+                        </th>
+                        <th
+                          class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                        >
+                          Phone
+                        </th>
+                        <th
+                          class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                        >
+                          Reference ID
+                        </th>
+                        <th
+                          class="table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                        >
+                          Status
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -130,11 +142,28 @@ function capitalize(string) {
                         v-for="(pa, index) in activeAttendee.payment_attempts"
                         :key="pa.id"
                       >
-                        <td class="border px-2 border-slate-300">{{ index+1 }}</td>
-                        <td class="border px-2 border-slate-300">{{ pa.payment_phone_number }}</td>
-                        <td class="border px-2 border-slate-300">{{ pa.transaction_status_number }}</td>
-                        <td class="border capitalize px-2 border-slate-300 py-1"><span :class="pa.status=='paid'?'bg-green-100 text-green-700 shadow-sm border border-green-200 px-2 py-.5 rounded-xl':'bg-yellow-100 text-yellow-700 shadow-sm border border-yellow-200 px-2 py-.5 rounded-xl'">
-                          {{ pa.status }}</span></td>
+                        <td class="border px-2 border-slate-300">
+                          {{ index + 1 }}
+                        </td>
+                        <td class="border px-2 border-slate-300">
+                          {{ pa.payment_phone_number }}
+                        </td>
+                        <td class="border px-2 border-slate-300">
+                          {{ pa.transaction_status_number }}
+                        </td>
+                        <td
+                          class="border capitalize px-2 border-slate-300 py-1"
+                        >
+                          <span
+                            :class="
+                              pa.status == 'paid'
+                                ? 'bg-green-100 text-green-700 shadow-sm border border-green-200 px-2 py-.5 rounded-xl'
+                                : 'bg-yellow-100 text-yellow-700 shadow-sm border border-yellow-200 px-2 py-.5 rounded-xl'
+                            "
+                          >
+                            {{ pa.status }}</span
+                          >
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -285,18 +314,9 @@ function capitalize(string) {
                       <th
                         class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
                       >
-                        Phone
+                        Contact
                       </th>
-                      <th
-                        class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
-                      >
-                        Email
-                      </th>
-                      <th
-                        class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
-                      >
-                        Location
-                      </th>
+
                       <th
                         class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
                       >
@@ -305,7 +325,12 @@ function capitalize(string) {
                       <th
                         class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
                       >
-                        Status
+                        Payment Status
+                      </th>
+                      <th
+                        class="hidden lg:table-cell text-left bg-slate-300 border border-slate-300 px-2 py-3"
+                      >
+                        Attendance Status
                       </th>
                       <th
                         class="text-left bg-slate-300 border border-slate-300 px-2 py-3"
@@ -323,8 +348,14 @@ function capitalize(string) {
                         {{ res.attendeesData?.from + index }}
                       </td>
                       <td class="border px-2 border-slate-300">
-                        <p class="text-lg font-bold lg:text-normal">
-                          {{ attendee.user?.name }}
+                        <p class="">
+                          <span class="text-lg font-bold lg:text-normal">{{
+                            attendee.user?.name
+                          }}</span>
+                          <span class="text-sm block">
+                            {{ attendee.user?.district.name }},
+                            {{ attendee.user?.region.name }}</span
+                          >
                         </p>
                         <a
                           class="lg:hidden text-blue-500 block"
@@ -344,23 +375,21 @@ function capitalize(string) {
                             :href="'tel: ' + attendee.user?.phone_number"
                             >{{ attendee.user?.phone_number }}
                           </a>
+                          <span class="block">{{ attendee.user?.email }}</span>
                         </p>
                       </td>
-                      <td
-                        class="hidden lg:table-cell border px-2 border-slate-300"
-                      >
-                        {{ attendee.user?.email }}
-                      </td>
-                      <td
-                        class="hidden lg:table-cell border px-2 border-slate-300"
-                      >
-                        {{ attendee.user?.district.name }},
-                        {{ attendee.user?.region.name }}
-                      </td>
+
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300"
                       >
                         {{ attendee.user?.institution }}
+                      </td>
+                      <td
+                        class="hidden lg:table-cell border px-2 border-slate-300"
+                      >
+                        {{ attendee.payment_attempts?.filter((pa)=>
+                          pa.status == 'paid'
+                        )?.[0].status }}
                       </td>
                       <td
                         class="hidden lg:table-cell border px-2 border-slate-300 text-center"
