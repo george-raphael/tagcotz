@@ -57,6 +57,7 @@ const searchAttendees = _.debounce(() => {
       route("search.attendees", {
         searchQuery: searchQuery.value ?? "",
         status: res.status,
+        event_id:  res.eventProp.id,
       })
     )
     .then(({ data }) => {

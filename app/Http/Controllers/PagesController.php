@@ -61,7 +61,7 @@ class PagesController extends Controller
             ->latest();
         $data['res']['attendeesData'] = $attendees->paginate(20)
             ->withQueryString();
-            // dd( $data['res']['attendeesData']);
+        // dd( $data['res']['attendeesData']);
         $data['res']['status'] = $status;
         $data['res']['totalCount'] = $attendees->count();
 
@@ -74,21 +74,33 @@ class PagesController extends Controller
     {
         $status = request('status');
         $searchQuery = request('searchQuery');
+        $event_id = request('event_id');
 
-        $data = $this->filterAttendances($searchQuery, $status);
+        $data = $this->filterAttendances($event_id, $searchQuery, $status);
         return $data;
     }
-    public function filterAttendances($searchQuery, $status)
+    public function filterAttendances($event_id, $searchQuery, $status)
     {
-        return Attendance::when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
-            $query->where('status', $status);
-        })
-            ->whereHas('user', function ($query) use ($searchQuery) {
-                $query->where('users.first_name', 'like', '%' . $searchQuery . '%');
-                $query->orWhere('users.last_name', 'like', '%' . $searchQuery . '%');
-                $query->orWhere('users.institution', 'like', '%' . $searchQuery . '%');
+        return Attendance::where('event_id', $event_id)
+            // ->whereHas('paymentAttempts', function ($query) use ($searchQuery) {
+            //     $query->where('payment_phone_number', 'like', '%' . $searchQuery . '%');
+            // })
+            // ->toSql();
+            ->when(in_array($status, ['verified', 'unverified', 'invalid']), function ($query) use ($status) {
+                $query->where('status', $status);
             })
-            ->with(['user.region', 'user.district'])
+            ->where(function($query) use($searchQuery){
+                $query->
+                orWhereHas('user', function ($query) use ($searchQuery) {
+                    $query->where('users.first_name', 'like', '%' . $searchQuery . '%');
+                    $query->orWhere('users.last_name', 'like', '%' . $searchQuery . '%');
+                    $query->orWhere('users.institution', 'like', '%' . $searchQuery . '%');
+                })
+                ->orWhereHas('paymentAttempts', function ($query) use ($searchQuery) {
+                    $query->where('payment_attempts.payment_phone_number', 'like', '%' . $searchQuery . '%');
+                });
+            })
+            ->with(['user.region', 'user.district', 'paymentAttempts'])
             ->latest()
             ->paginate(20);
     }
